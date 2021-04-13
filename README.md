@@ -1,4 +1,4 @@
-###Deployed on Heroku:
+### Deployed on Heroku:
 https://hexlet-chat-app.herokuapp.com/
 
 ---

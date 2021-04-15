@@ -20,6 +20,10 @@ module.exports = {
     host: '0.0.0.0',
     publicPath: '/assets/',
     historyApiFallback: true,
+    watchOptions: {
+      poll: true,
+      ignored: /node_modules/,
+    },
   },
   plugins: [
     new MiniCssExtractPlugin(),

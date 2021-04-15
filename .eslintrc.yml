@@ -32,3 +32,16 @@ rules:
   functional/functional-parameters: 0
   functional/no-try-statement: 0
   functional/no-throw-statement: 0
+  import/no-extraneous-dependencies: ['error', {
+    devDependencies: true
+  } ]
+  jsx-a11y/label-has-associated-control: [ "error", {
+    required: {
+      some: [ "nesting", "id" ]
+    }
+  } ]
+  jsx-a11y/label-has-for: [ "error", {
+    required: {
+      some: [ "nesting", "id" ]
+    }
+  } ]

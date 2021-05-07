@@ -28,12 +28,10 @@ const Login = () => {
     const url = routes.login();
     try {
       const response = await axios.post(url, data);
-      if (response.status === 200) {
-        const { token, username } = response.data;
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('userName', username);
-        setAuth({ authToken: token, userName: username });
-      }
+      const { token, username } = response.data;
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userName', username);
+      setAuth({ authToken: token, userName: username });
     } catch (e) {
       if (e.response?.status === 401) {
         setErrors({

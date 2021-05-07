@@ -35,13 +35,18 @@ rules:
   import/no-extraneous-dependencies: ['error', {
     devDependencies: true
   } ]
-  jsx-a11y/label-has-associated-control: [ "error", {
+  jsx-a11y/label-has-associated-control: [ 'error', {
     required: {
-      some: [ "nesting", "id" ]
+      some: [ 'nesting', 'id' ]
     }
   } ]
-  jsx-a11y/label-has-for: [ "error", {
+  jsx-a11y/label-has-for: [ 'error', {
     required: {
-      some: [ "nesting", "id" ]
+      some: [ 'nesting', 'id' ]
     }
   } ]
+  no-param-reassign: ['error', { 
+    props: true,
+    ignorePropertyModificationsFor: ['state'] 
+  }]
+

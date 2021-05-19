@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {
+  useEffect, useState, useContext, useRef,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { io } from 'socket.io-client';
 import MessageItem from './MessageItem.jsx';
@@ -12,6 +14,7 @@ const Messages = ({ messages }) => {
     msg: '',
     state: 'idle',
   });
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
   const currentChannelId = useSelector((state) => state.currentChannelId);
   const { auth } = useContext(AuthContext);
@@ -25,9 +28,11 @@ const Messages = ({ messages }) => {
     setMsgState((prevState) => ({ ...prevState, state: 'pending' }));
     socket.emit('newMessage', newMsg, () => {
       setMsgState((prevState) => ({ ...prevState, state: 'idle' }));
+      inputRef.current.focus();
     });
   };
   useEffect(() => {
+    inputRef.current.focus();
     socket.on('newMessage', (response) => {
       dispatch(addMessage(response));
       setMsgState((prevState) => ({ ...prevState, msg: '' }));
@@ -44,7 +49,15 @@ const Messages = ({ messages }) => {
         <div className="mt-auto">
           <form onSubmit={submitHandler} noValidate className="">
             <div className="input-group">
-              <input onChange={changeHandler} name="body" aria-label="body" className="form-control" disabled={msgState.state === 'pending'} value={msgState.msg} />
+              <input
+                onChange={changeHandler}
+                name="message"
+                aria-label="message"
+                className="form-control"
+                disabled={msgState.state === 'pending'}
+                ref={inputRef}
+                value={msgState.msg}
+              />
               <div className="input-group-append">
                 <button type="submit" className="btn btn-primary" disabled={msgState.state === 'pending'}>Отправить</button>
               </div>

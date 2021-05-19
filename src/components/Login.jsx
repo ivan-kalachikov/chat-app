@@ -30,8 +30,8 @@ const Login = () => {
       const response = await axios.post(url, data);
       const { token, username } = response.data;
       localStorage.setItem('authToken', token);
-      localStorage.setItem('userName', username);
-      setAuth({ authToken: token, userName: username });
+      localStorage.setItem('username', username);
+      setAuth({ authToken: token, username });
     } catch (e) {
       if (e.response?.status === 401) {
         setErrors({

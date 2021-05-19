@@ -20,10 +20,10 @@ const store = configureStore({
 
 const App = () => {
   const authToken = localStorage.getItem('authToken');
-  const userName = localStorage.getItem('userName');
+  const username = localStorage.getItem('username');
   const [auth, setAuth] = useState({
     authToken,
-    userName,
+    username,
   });
 
   return (
@@ -51,3 +51,5 @@ const App = () => {
 };
 
 export default App;
+
+// TODO: add i18next

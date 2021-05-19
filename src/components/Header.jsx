@@ -6,7 +6,7 @@ const Header = () => {
   const { setAuth } = useContext(AuthContext);
   const exitClickHandler = () => {
     localStorage.removeItem('authToken');
-    setAuth({ authToken: null, userName: null });
+    setAuth({ authToken: null, username: null });
   };
   return (
     <AuthContext.Consumer>

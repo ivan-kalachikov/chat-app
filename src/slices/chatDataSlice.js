@@ -15,6 +15,7 @@ export const fetchChatData = createAsyncThunk(
     const url = routes.data();
     try {
       const response = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -28,6 +29,9 @@ const chatDataSlice = createSlice({
   reducers: {
     setActiveChannel: (state, action) => {
       state.currentChannelId = action.payload;
+    },
+    addMessage: (state, action) => {
+      state.messages.push(action.payload);
     },
   },
   extraReducers: {
@@ -47,5 +51,5 @@ const chatDataSlice = createSlice({
 });
 
 const { reducer, actions } = chatDataSlice;
-export const { setActiveChannel } = actions;
+export const { setActiveChannel, addMessage } = actions;
 export default reducer;

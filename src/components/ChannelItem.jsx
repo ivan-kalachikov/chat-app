@@ -1,22 +1,21 @@
 import React from 'react';
-import cn from 'classnames';
+import { Nav, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { setActiveChannel } from '../slices/chatDataSlice';
+import { setCurrentChannel } from '../slices/channelsSlice';
 
-const ChannelItem = ({ name, active, id }) => {
-  const classNames = cn('nav-link btn-block mb-2 text-left btn',
-    {
-      'btn-primary': active,
-      'btn-light': !active,
-    });
+const ChannelItem = ({ commonProps }) => {
+  const { name, id, isActive } = commonProps;
   const dispatch = useDispatch();
-  const clickHandler = (channelId) => () => {
-    dispatch(setActiveChannel(channelId));
+  const clickHandler = () => {
+    dispatch(setCurrentChannel({ id }));
   };
   return (
-    <li className="nav-item">
-      <button onClick={clickHandler(id)} type="button" className={classNames}>{name}</button>
-    </li>
+    <Nav.Item as="li" className="w-100">
+      <Button onClick={clickHandler} variant={isActive ? 'secondary' : 'light'} className="px-4 rounded-0 w-100 text-truncate text-start" title={name}>
+        <span className="me-3">#</span>
+        {name}
+      </Button>
+    </Nav.Item>
   );
 };
 

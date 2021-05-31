@@ -11,8 +11,17 @@ import Page404 from './components/Page404.jsx';
 import Header from './components/Header.jsx';
 import Login from './components/Login.jsx';
 import Chat from './components/Chat.jsx';
+import Modals from './components/modals/Modals.jsx';
 import AuthContext from './components/AuthContext.jsx';
-import reducer from './slices/chatDataSlice';
+import channelsReducer from './slices/channelsSlice';
+import messagesReducer from './slices/messagesSlice';
+import modalReducer from './slices/modalSlice';
+
+const reducer = {
+  channelsInfo: channelsReducer,
+  messagesInfo: messagesReducer,
+  modal: modalReducer,
+};
 
 const store = configureStore({
   reducer,
@@ -43,6 +52,7 @@ const App = () => {
                 <Page404 />
               </Route>
             </Switch>
+            <Modals />
           </Router>
         </AuthContext.Provider>
       </div>
@@ -51,5 +61,3 @@ const App = () => {
 };
 
 export default App;
-
-// TODO: add i18next

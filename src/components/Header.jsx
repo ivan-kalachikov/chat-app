@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, Container } from 'react-bootstrap';
 import AuthContext from './AuthContext.jsx';
 
 const Header = () => {
@@ -11,10 +12,12 @@ const Header = () => {
   return (
     <AuthContext.Consumer>
       {(authData) => (
-        <nav className="mb-3 navbar navbar-expand-lg navbar-light bg-light">
-          <Link className="mr-auto navbar-brand" to="/">Hexlet Chat</Link>
-          {authData.auth.authToken && <button onClick={exitClickHandler} type="button" className="btn btn-primary">Выйти</button>}
-        </nav>
+        <Navbar expand="lg" bg="white" className="shadow-sm">
+          <Container>
+            <Link className="navbar-brand" to="/">Hexlet Chat</Link>
+            {authData.auth.authToken && <button onClick={exitClickHandler} type="button" className="btn btn-primary">Выйти</button>}
+          </Container>
+        </Navbar>
       )}
     </AuthContext.Consumer>
   );

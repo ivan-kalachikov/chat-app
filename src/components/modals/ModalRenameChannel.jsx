@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import socket from '../../socket';
 import { closeModal } from '../../slices/modalSlice';
+import ackWithTimeout from '../../utils';
 
 const ModalRenameChannel = () => {
   const TYPE = 'renameChannel';
@@ -21,6 +22,7 @@ const ModalRenameChannel = () => {
 
   const validationSchema = Yup.object().shape({
     channelName: Yup.string()
+      .trim()
       .required('Обязательное поле')
       .notOneOf(channelsNames, 'Должно быть уникальным')
       .min(3, 'От 3 до 20 символов')
@@ -29,19 +31,31 @@ const ModalRenameChannel = () => {
   const initialValues = {
     channelName: '',
   };
-  const submitHandler = (formData, { setErrors, setSubmitting, resetForm }) => {
-    const name = formData.channelName;
-    socket.emit('renameChannel', { id: renamedChannelId, name }, (({ status }) => {
-      if (status === 'ok') {
-        dispatch(closeModal());
-        resetForm();
-      } else {
-        setErrors({
-          channelName: 'Ошибка сети',
-        });
-      }
-    }));
+
+  const onSuccessSend = (resetForm, setSubmitting, setFieldError) => ({ status }) => {
+    if (status === 'ok') {
+      resetForm();
+      dispatch(closeModal());
+    } else {
+      setFieldError('channelName', 'Ошибка сети');
+      setSubmitting(false);
+    }
+  };
+
+  const onFailSend = (setSubmitting, setFieldError) => () => {
+    inputRef.current.focus();
     setSubmitting(false);
+    setFieldError('channelName', 'Ошибка сети');
+  };
+
+  const submitHandler = (formData, { setFieldError, setSubmitting, resetForm }) => {
+    setSubmitting(true);
+    const name = formData.channelName;
+    socket.volatile.emit('renameChannel', { id: renamedChannelId, name }, ackWithTimeout(
+      onSuccessSend(resetForm, setSubmitting, setFieldError),
+      onFailSend(setSubmitting, setFieldError),
+      2500,
+    ));
   };
   const hideHandler = () => {
     dispatch(closeModal());
@@ -77,6 +91,7 @@ const ModalRenameChannel = () => {
               <Field
                 name="channelName"
                 innerRef={inputRef}
+                disabled={isSubmitting}
                 className={`form-control ${errors.channelName && touched.channelName && 'is-invalid'}`}
               />
               <ErrorMessage className="invalid-tooltip" name="channelName" component="div" />

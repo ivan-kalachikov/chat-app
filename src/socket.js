@@ -5,30 +5,31 @@ import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice
 const socket = io();
 
 const socketWatcher = (dispatch) => {
-  socket.on('newMessage', (response) => {
-    dispatch(addMessage(response));
-  });
+  socket.on('connect', () => {
+    socket.on('newMessage', (response) => {
+      dispatch(addMessage(response));
+    });
 
-  socket.on('newChannel', (response) => {
-    dispatch(addChannel({ channel: response }));
-  });
+    socket.on('newChannel', (response) => {
+      dispatch(addChannel({ channel: response }));
+    });
 
-  socket.on('removeChannel', (response) => {
-    dispatch(removeChannel(response));
-    dispatch(removeChannelMessages({ channelId: response.id }));
-  });
+    socket.on('removeChannel', (response) => {
+      dispatch(removeChannel(response));
+      dispatch(removeChannelMessages({ channelId: response.id }));
+    });
 
-  socket.on('renameChannel', (response) => {
-    console.log('rename', response);
-    dispatch(renameChannel({ channel: response }));
-  });
+    socket.on('renameChannel', (response) => {
+      dispatch(renameChannel({ channel: response }));
+    });
 
-  socket.on('connect_error', () => {
-    console.log('ERROR CONNECTION');
-  });
+    socket.on('connect_error', () => {
+      console.log('ERROR CONNECTION');
+    });
 
-  socket.on('disconnect', (reason) => {
-    console.log('DISCONNECT', reason);
+    socket.on('disconnect', (reason) => {
+      console.log('DISCONNECT', reason);
+    });
   });
 };
 

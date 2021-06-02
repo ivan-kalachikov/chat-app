@@ -14,10 +14,7 @@ const options = {
       },
     },
   },
-  react: {
-    wait: true,
-  },
-  // fallbackLng: 'en',
+  fallbackLng: 'ru',
 };
 
 const i18n = i18next.createInstance();

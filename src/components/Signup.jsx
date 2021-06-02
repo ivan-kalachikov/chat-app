@@ -18,15 +18,22 @@ const Login = () => {
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .trim()
-      .required('Username is required!'),
+      .required('Username is required!')
+      .min(3, 'От 3 до 20 символов')
+      .max(20, 'От 3 до 20 символов'),
     password: Yup.string()
       .trim()
+      .min(6, 'Не менее 6 символов')
       .required('Password is required!'),
+    passwordConfirmation: Yup.string()
+      .trim()
+      .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать'),
   });
 
   const initialValues = {
     username: '',
     password: '',
+    passwordConfirmation: '',
   };
 
   useEffect(() => {
@@ -39,8 +46,8 @@ const Login = () => {
     setAuth({ authToken: token, username });
   }, [authData]);
 
-  const authenticate = async (data, { setFieldError, setSubmitting }) => {
-    const url = routes.login();
+  const registration = async (data, { setFieldError, setSubmitting }) => {
+    const url = routes.signup();
     setSubmitting(true);
     try {
       const response = await axios.post(url, data);
@@ -48,8 +55,8 @@ const Login = () => {
       setAuthData({ token, username });
       setSubmitting(false);
     } catch (e) {
-      if (e.response?.status === 401) {
-        setFieldError('password', 'Неверные имя пользователя или пароль');
+      if (e.response?.status === 409) {
+        setFieldError('username', 'Пользователь с таким именем уже существует');
       } else {
         setFieldError('password', 'Ошибка сети');
       }
@@ -66,13 +73,13 @@ const Login = () => {
               <Formik
                 validationSchema={validationSchema}
                 initialValues={initialValues}
-                onSubmit={authenticate}
+                onSubmit={registration}
               >
                 {({
                   errors, touched, values, handleChange, handleBlur, handleSubmit, isSubmitting,
                 }) => (
                   <Form onSubmit={handleSubmit}>
-                    <h1 className="text-center mb-4">Войти</h1>
+                    <h1 className="text-center mb-4">Регистрация</h1>
                     <Form.Floating className="mb-3">
                       <Form.Control
                         className={
@@ -108,16 +115,32 @@ const Login = () => {
                       <Form.Label htmlFor="password">Пароль</Form.Label>
                       <ErrorMessage className="invalid-tooltip" name="password" component="div" />
                     </Form.Floating>
-                    <Button variant="outline-primary" className="w-100 py-3 mt-2" type="submit" disabled={isSubmitting}>Войти</Button>
+                    <Form.Floating className="mb-3">
+                      <Form.Control
+                        className={errors.passwordConfirmation && touched.passwordConfirmation && 'is-invalid'}
+                        type="password"
+                        name="passwordConfirmation"
+                        id="passwordConfirmation"
+                        autoComplete="off"
+                        required
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.passwordConfirmation}
+                        placeholder="Пароль"
+                      />
+                      <Form.Label htmlFor="passwordConfirmation">Подтвердите пароль</Form.Label>
+                      <ErrorMessage className="invalid-tooltip" name="passwordConfirmation" component="div" />
+                    </Form.Floating>
+                    <Button variant="outline-primary" className="w-100 py-3 mt-2" type="submit" disabled={isSubmitting}>Зарегистрироваться</Button>
                   </Form>
                 )}
               </Formik>
             </Card.Body>
             <Card.Footer className="p-4">
               <div className="text-center">
-                <span>Нет аккаунта?</span>
+                <span>Уже есть аккаунт?</span>
                 {' '}
-                <Link to="/signup">Регистрация</Link>
+                <Link to="/login">Войти</Link>
               </div>
             </Card.Footer>
           </Card>

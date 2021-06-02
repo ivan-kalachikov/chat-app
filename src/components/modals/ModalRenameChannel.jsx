@@ -92,6 +92,7 @@ const ModalRenameChannel = () => {
                 name="channelName"
                 innerRef={inputRef}
                 disabled={isSubmitting}
+                autoComplete="off"
                 className={`form-control ${errors.channelName && touched.channelName && 'is-invalid'}`}
               />
               <ErrorMessage className="invalid-tooltip" name="channelName" component="div" />

@@ -10,6 +10,7 @@ import {
 import Page404 from './components/Page404.jsx';
 import Header from './components/Header.jsx';
 import Login from './components/Login.jsx';
+import Signup from './components/Signup.jsx';
 import Chat from './components/Chat.jsx';
 import Modals from './components/modals/Modals.jsx';
 import AuthContext from './components/AuthContext.jsx';
@@ -47,6 +48,9 @@ const App = () => {
               </Route>
               <Route path="/login">
                 {authToken ? <Redirect to="/" /> : <Login />}
+              </Route>
+              <Route path="/signup">
+                {authToken ? <Redirect to="/" /> : <Signup />}
               </Route>
               <Route path="*">
                 <Page404 />

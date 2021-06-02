@@ -12,9 +12,9 @@ const Chat = () => {
   const { authToken } = auth;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setInitialState(authToken));
     socketWatcher(dispatch);
-  }, []);
+    dispatch(setInitialState(authToken));
+  }, [authToken]);
 
   return (
     <AuthContext.Consumer>

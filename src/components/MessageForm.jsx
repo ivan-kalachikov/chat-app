@@ -15,11 +15,13 @@ const MessageForm = () => {
   const { username } = auth;
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const inputRef = useRef(null);
+
   const validationSchema = Yup.object().shape({
     message: Yup.string()
       .trim()
       .required('Нельзя отправить пустое сообщение'),
   });
+
   const initialValues = {
     message: '',
   };
@@ -82,6 +84,7 @@ const MessageForm = () => {
                 className={`border-0 form-control ${errors.message && touched.message && 'is-invalid'}`}
                 disabled={isSubmitting}
                 innerRef={inputRef}
+                autoComplete="off"
                 placeholder="Введите сообщение..."
                 onBlur={blurHandler(setTouched)}
                 required

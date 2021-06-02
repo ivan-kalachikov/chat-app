@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import socket from '../../socket';
 import { closeModal } from '../../slices/modalSlice';
 import ackWithTimeout from '../../utils';
 
 const ModalRemoveChannel = () => {
+  const { t } = useTranslation();
   const TYPE = 'removeChannel';
   const isOpen = useSelector((state) => state.modal.isOpen);
   const modalType = useSelector((state) => state.modal.type);
@@ -21,13 +23,13 @@ const ModalRemoveChannel = () => {
       dispatch(closeModal());
     } else {
       setRequestStatus('failed');
-      setRequestError('Ошибка сети');
+      setRequestError(t('errors.networkError'));
     }
   };
 
   const onFailSend = () => {
     setRequestStatus('failed');
-    setRequestError('Ошибка сети');
+    setRequestError(t('errors.networkError'));
   };
 
   const clickHandler = () => {
@@ -49,10 +51,10 @@ const ModalRemoveChannel = () => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title>Удалить канал</Modal.Title>
+        <Modal.Title>{t('ui.channels.removeTitle')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Вы Уверены?
+        {t('ui.channels.confirmation')}
         {requestStatus === 'failed'
         && (
         <>
@@ -62,8 +64,8 @@ const ModalRemoveChannel = () => {
         )}
       </Modal.Body>
       <Modal.Footer className="border-0">
-        <Button onClick={hideHandler} variant="secondary">Отменить</Button>
-        <Button onClick={clickHandler} variant="danger" type="submit" disabled={requestStatus === 'pending'}>Удалить</Button>
+        <Button onClick={hideHandler} variant="secondary">{t('ui.channels.cancel')}</Button>
+        <Button onClick={clickHandler} variant="danger" type="submit" disabled={requestStatus === 'pending'}>{t('ui.channels.remove')}</Button>
       </Modal.Footer>
     </Modal>
   );

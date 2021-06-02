@@ -6,11 +6,13 @@ import {
 } from 'formik';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import socket from '../../socket';
 import { closeModal } from '../../slices/modalSlice';
 import ackWithTimeout from '../../utils';
 
 const ModalRenameChannel = () => {
+  const { t } = useTranslation();
   const TYPE = 'renameChannel';
   const inputRef = useRef(null);
   const channels = useSelector((state) => state.channelsInfo.channels);
@@ -24,9 +26,9 @@ const ModalRenameChannel = () => {
     channelName: Yup.string()
       .trim()
       .required('Обязательное поле')
-      .notOneOf(channelsNames, 'Должно быть уникальным')
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов'),
+      .notOneOf(channelsNames)
+      .min(3)
+      .max(20),
   });
   const initialValues = {
     channelName: '',
@@ -37,7 +39,7 @@ const ModalRenameChannel = () => {
       resetForm();
       dispatch(closeModal());
     } else {
-      setFieldError('channelName', 'Ошибка сети');
+      setFieldError('channelName', t('errors.networkError'));
       setSubmitting(false);
     }
   };
@@ -45,7 +47,7 @@ const ModalRenameChannel = () => {
   const onFailSend = (setSubmitting, setFieldError) => () => {
     inputRef.current.focus();
     setSubmitting(false);
-    setFieldError('channelName', 'Ошибка сети');
+    setFieldError('channelName', t('errors.networkError'));
   };
 
   const submitHandler = (formData, { setFieldError, setSubmitting, resetForm }) => {
@@ -84,7 +86,7 @@ const ModalRenameChannel = () => {
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title>Переименовать канал</Modal.Title>
+            <Modal.Title>{t('ui.channels.renameTitle')}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -99,8 +101,8 @@ const ModalRenameChannel = () => {
             </Form>
           </Modal.Body>
           <Modal.Footer className="border-0">
-            <Button onClick={cancelHandler(resetForm)} variant="secondary">Отменить</Button>
-            <Button onClick={submitForm} variant="primary" type="submit" disabled={isSubmitting}>Отправить</Button>
+            <Button onClick={cancelHandler(resetForm)} variant="secondary">{t('ui.channels.cancel')}</Button>
+            <Button onClick={submitForm} variant="primary" type="submit" disabled={isSubmitting}>{t('ui.channels.rename')}</Button>
           </Modal.Footer>
         </Modal>
       )}

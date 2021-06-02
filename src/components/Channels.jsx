@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col, Button, Nav } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import ChannelItem from './ChannelItem.jsx';
 import ChannelItemEditable from './ChannelItemEditable.jsx';
 import AddIcon from '../images/add.svg';
@@ -8,6 +9,7 @@ import { openModal } from '../slices/modalSlice';
 
 const Channels = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const channelsList = useSelector((state) => state.channelsInfo.channels);
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const addChannelHandler = () => {
@@ -16,8 +18,8 @@ const Channels = () => {
   return (
     <Col xs={2} className="px-0 pt-5 border-end overflow-auto h-100 bg-light">
       <div className="d-flex justify-content-between mb-2 px-4">
-        <span>Каналы</span>
-        <Button onClick={addChannelHandler} variant="link" className="ml-auto p-0 btn-group-vertical">
+        <span>{t('ui.channels.title')}</span>
+        <Button onClick={addChannelHandler} variant="link" title={t('ui.channels.add')} className="ml-auto p-0 btn-group-vertical">
           <AddIcon />
         </Button>
       </div>

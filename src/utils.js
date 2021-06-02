@@ -1,4 +1,5 @@
 const ackWithTimeout = (onSuccess, onTimeout, timeout) => {
+  // eslint-disable-next-line functional/no-let
   let called = false;
 
   const timer = setTimeout(() => {
@@ -11,6 +12,7 @@ const ackWithTimeout = (onSuccess, onTimeout, timeout) => {
     if (called) return;
     called = true;
     clearTimeout(timer);
+    // eslint-disable-next-line functional/no-this-expression
     onSuccess.apply(this, args);
   };
 };

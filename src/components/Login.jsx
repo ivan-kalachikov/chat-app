@@ -3,6 +3,7 @@ import {
   ErrorMessage, Formik,
 } from 'formik';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import axios from 'axios';
 import {
@@ -14,14 +15,15 @@ import AuthContext from './AuthContext.jsx';
 const Login = () => {
   const { setAuth } = useContext(AuthContext);
   const [authData, setAuthData] = useState(null);
+  const { t } = useTranslation();
 
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .trim()
-      .required('Username is required!'),
+      .required(),
     password: Yup.string()
       .trim()
-      .required('Password is required!'),
+      .required(),
   });
 
   const initialValues = {
@@ -49,9 +51,9 @@ const Login = () => {
       setSubmitting(false);
     } catch (e) {
       if (e.response?.status === 401) {
-        setFieldError('password', 'Неверные имя пользователя или пароль');
+        setFieldError('password', t('errors.wrongUsernameOrPassword'));
       } else {
-        setFieldError('password', 'Ошибка сети');
+        setFieldError('password', t('errors.networkError'));
       }
       setSubmitting(false);
     }
@@ -72,7 +74,7 @@ const Login = () => {
                   errors, touched, values, handleChange, handleBlur, handleSubmit, isSubmitting,
                 }) => (
                   <Form onSubmit={handleSubmit}>
-                    <h1 className="text-center mb-4">Войти</h1>
+                    <h1 className="text-center mb-4">{t('ui.login.title')}</h1>
                     <Form.Floating className="mb-3">
                       <Form.Control
                         className={
@@ -87,9 +89,9 @@ const Login = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.username}
-                        placeholder="Ваш ник"
+                        placeholder={t('ui.login.username')}
                       />
-                      <Form.Label htmlFor="username">Ваш ник</Form.Label>
+                      <Form.Label htmlFor="username">{t('ui.login.username')}</Form.Label>
                       <ErrorMessage className="invalid-tooltip" name="username" component="div" />
                     </Form.Floating>
                     <Form.Floating className="mb-3">
@@ -103,21 +105,21 @@ const Login = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.password}
-                        placeholder="Пароль"
+                        placeholder={t('ui.login.password')}
                       />
-                      <Form.Label htmlFor="password">Пароль</Form.Label>
+                      <Form.Label htmlFor="password">{t('ui.login.password')}</Form.Label>
                       <ErrorMessage className="invalid-tooltip" name="password" component="div" />
                     </Form.Floating>
-                    <Button variant="outline-primary" className="w-100 py-3 mt-2" type="submit" disabled={isSubmitting}>Войти</Button>
+                    <Button variant="outline-primary" className="w-100 py-3 mt-2" type="submit" disabled={isSubmitting}>{t('ui.login.signInButton')}</Button>
                   </Form>
                 )}
               </Formik>
             </Card.Body>
             <Card.Footer className="p-4">
               <div className="text-center">
-                <span>Нет аккаунта?</span>
+                <span>{t('ui.login.noAccount')}</span>
                 {' '}
-                <Link to="/signup">Регистрация</Link>
+                <Link to="/signup">{t('ui.login.register')}</Link>
               </div>
             </Card.Footer>
           </Card>

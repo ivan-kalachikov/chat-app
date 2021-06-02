@@ -7,6 +7,8 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n';
 import Page404 from './components/Page404.jsx';
 import Header from './components/Header.jsx';
 import Login from './components/Login.jsx';
@@ -40,24 +42,26 @@ const App = () => {
     <Provider store={store}>
       <div className="d-flex flex-column h-100">
         <AuthContext.Provider value={{ auth, setAuth }}>
-          <Router>
-            <Header />
-            <Switch>
-              <Route exact path="/">
-                { authToken ? <Chat /> : <Redirect to="/login" /> }
-              </Route>
-              <Route path="/login">
-                {authToken ? <Redirect to="/" /> : <Login />}
-              </Route>
-              <Route path="/signup">
-                {authToken ? <Redirect to="/" /> : <Signup />}
-              </Route>
-              <Route path="*">
-                <Page404 />
-              </Route>
-            </Switch>
-            <Modals />
-          </Router>
+          <I18nextProvider i18n={i18n}>
+            <Router>
+              <Header />
+              <Switch>
+                <Route exact path="/">
+                  { authToken ? <Chat /> : <Redirect to="/login" /> }
+                </Route>
+                <Route path="/login">
+                  {authToken ? <Redirect to="/" /> : <Login />}
+                </Route>
+                <Route path="/signup">
+                  {authToken ? <Redirect to="/" /> : <Signup />}
+                </Route>
+                <Route path="*">
+                  <Page404 />
+                </Route>
+              </Switch>
+              <Modals />
+            </Router>
+          </I18nextProvider>
         </AuthContext.Provider>
       </div>
     </Provider>

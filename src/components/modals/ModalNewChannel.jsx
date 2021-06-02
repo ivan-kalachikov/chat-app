@@ -6,12 +6,14 @@ import {
 } from 'formik';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import socket from '../../socket';
 import { closeModal } from '../../slices/modalSlice';
 import { setCurrentChannel } from '../../slices/channelsSlice';
 import ackWithTimeout from '../../utils';
 
 const ModalAddChannel = () => {
+  const { t } = useTranslation();
   const TYPE = 'addChannel';
   const inputRef = useRef(null);
   const channels = useSelector((state) => state.channelsInfo.channels);
@@ -23,10 +25,10 @@ const ModalAddChannel = () => {
   const validationSchema = Yup.object().shape({
     channelName: Yup.string()
       .trim()
-      .required('Обязательное поле')
-      .notOneOf(channelsNames, 'Должно быть уникальным')
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов'),
+      .required()
+      .notOneOf(channelsNames)
+      .min(3)
+      .max(20),
   });
 
   const initialValues = {
@@ -45,7 +47,7 @@ const ModalAddChannel = () => {
       setTouched({ channelName: false });
       dispatch(closeModal());
     } else {
-      setFieldError('channelName', 'Ошибка сети');
+      setFieldError('channelName', t('errors.networkError'));
       setSubmitting(false);
     }
   };
@@ -53,7 +55,7 @@ const ModalAddChannel = () => {
   const onFailSend = (setSubmitting, setFieldError) => () => {
     inputRef.current.focus();
     setSubmitting(false);
-    setFieldError('channelName', 'Ошибка сети');
+    setFieldError('channelName', t('errors.networkError'));
   };
 
   const submitHandler = (formData, {
@@ -93,7 +95,7 @@ const ModalAddChannel = () => {
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title>Добавить канал</Modal.Title>
+            <Modal.Title>{t('ui.channels.addTitle')}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -108,8 +110,8 @@ const ModalAddChannel = () => {
             </Form>
           </Modal.Body>
           <Modal.Footer className="border-0">
-            <Button onClick={cancelHandler(resetForm)} variant="secondary">Отменить</Button>
-            <Button onClick={submitForm} variant="primary" type="submit" disabled={isSubmitting}>Отправить</Button>
+            <Button onClick={cancelHandler(resetForm)} variant="secondary">{t('ui.channels.cancel')}</Button>
+            <Button onClick={submitForm} variant="primary" type="submit" disabled={isSubmitting}>{t('ui.channels.add')}</Button>
           </Modal.Footer>
         </Modal>
       )}

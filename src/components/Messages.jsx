@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { Col } from 'react-bootstrap';
 import MessageItem from './MessageItem.jsx';
 import MessageForm from './MessageForm.jsx';
 
 const Messages = () => {
+  const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const channels = useSelector((state) => state.channelsInfo.channels);
   const messages = useSelector((state) => state.messagesInfo.messages
@@ -19,7 +21,7 @@ const Messages = () => {
               {!!channels.length && `# ${channels.find(({ id }) => id === currentChannelId)?.name}`}
             </b>
           </p>
-          <span className="text-muted">{`${messages.length} сообщений`}</span>
+          <span className="text-muted">{t('ui.messages.count', { count: messages.length })}</span>
         </div>
         <div id="messages-box" className="chat-messages px-5 d-flex flex-grow-1 flex-column overflow-auto">
           {messages && messages.map(({ username: name, body, id }, i) => (

@@ -4,6 +4,7 @@ import { InputGroup, Button } from 'react-bootstrap';
 import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik';
+import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import AuthContext from './AuthContext.jsx';
 import socket from '../socket';
@@ -11,6 +12,7 @@ import ackWithTimeout from '../utils';
 import SendIcon from '../images/send.svg';
 
 const MessageForm = () => {
+  const { t } = useTranslation();
   const { auth } = useContext(AuthContext);
   const { username } = auth;
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
@@ -19,7 +21,7 @@ const MessageForm = () => {
   const validationSchema = Yup.object().shape({
     message: Yup.string()
       .trim()
-      .required('Нельзя отправить пустое сообщение'),
+      .required(),
   });
 
   const initialValues = {
@@ -31,7 +33,7 @@ const MessageForm = () => {
       resetForm();
       setTouched({ message: false });
     } else {
-      setFieldError('message', 'Ошибка сети');
+      setFieldError('message', t('errors.networkError'));
     }
     setSubmitting(false);
     inputRef.current.focus();
@@ -40,7 +42,7 @@ const MessageForm = () => {
   const onFailSend = (setSubmitting, setFieldError) => () => {
     inputRef.current.focus();
     setSubmitting(false);
-    setFieldError('message', 'Ошибка сети');
+    setFieldError('message', t('errors.networkError'));
     inputRef.current.focus();
   };
 
@@ -85,12 +87,12 @@ const MessageForm = () => {
                 disabled={isSubmitting}
                 innerRef={inputRef}
                 autoComplete="off"
-                placeholder="Введите сообщение..."
+                placeholder={t('ui.messages.placeholder')}
                 onBlur={blurHandler(setTouched)}
                 required
               />
               <ErrorMessage className="invalid-tooltip top-0 translate-middle-y" name="message" component="div" />
-              <Button onClick={submitForm} variant="" type="submit" disabled={isSubmitting}>
+              <Button onClick={submitForm} variant="" type="submit" title={t('ui.messages.send')} disabled={isSubmitting}>
                 <SendIcon />
               </Button>
             </InputGroup>

@@ -69,16 +69,20 @@ const ModalAddChannel = () => {
       2500,
     ));
   };
+
   const hideHandler = () => {
     dispatch(closeModal());
   };
+
   const showHandler = () => {
     inputRef.current.focus();
   };
+
   const cancelHandler = (resetForm) => () => {
     resetForm();
     dispatch(closeModal());
   };
+
   return (
     <Formik
       validationSchema={validationSchema}

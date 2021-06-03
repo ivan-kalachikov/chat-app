@@ -6,9 +6,11 @@ import { setCurrentChannel } from '../slices/channelsSlice';
 const ChannelItem = ({ commonProps }) => {
   const { name, id, isActive } = commonProps;
   const dispatch = useDispatch();
+
   const clickHandler = () => {
     dispatch(setCurrentChannel({ id }));
   };
+
   return (
     <Nav.Item as="li" className="w-100">
       <Button onClick={clickHandler} variant={isActive ? 'secondary' : 'light'} className="px-4 rounded-0 w-100 text-truncate text-start" title={name}>

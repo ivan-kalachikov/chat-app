@@ -30,6 +30,7 @@ const ModalRenameChannel = () => {
       .min(3)
       .max(20),
   });
+
   const initialValues = {
     channelName: '',
   };
@@ -59,17 +60,21 @@ const ModalRenameChannel = () => {
       2500,
     ));
   };
+
   const hideHandler = () => {
     dispatch(closeModal());
   };
+
   const showHandler = (setFieldValue) => () => {
     setFieldValue('channelName', channels.find(({ id }) => id === renamedChannelId).name);
     inputRef.current.focus();
   };
+
   const cancelHandler = (resetForm) => () => {
     resetForm();
     dispatch(closeModal());
   };
+
   return (
     <Formik
       validationSchema={validationSchema}

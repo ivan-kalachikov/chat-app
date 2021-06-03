@@ -12,18 +12,22 @@ const ChannelItemEditable = ({ commonProps }) => {
   const { name, id, isActive } = commonProps;
   const type = isActive ? 'secondary' : 'light';
   const dispatch = useDispatch();
-  const clickHandler = (channelId) => () => {
-    dispatch(setCurrentChannel({ id: channelId }));
+
+  const clickHandler = () => {
+    dispatch(setCurrentChannel({ id }));
   };
+
   const renameHandler = () => {
     dispatch(openModal({ type: 'renameChannel', extra: { id } }));
   };
+
   const removeHandler = () => {
     dispatch(openModal({ type: 'removeChannel', extra: { id } }));
   };
+
   return (
     <Dropdown className="d-flex w-100" as={ButtonGroup}>
-      <Button onClick={clickHandler(id)} className="text-start px-4 rounded-0 flex-grow-1 text-truncate" title={name} variant={type}>
+      <Button onClick={clickHandler} className="text-start px-4 rounded-0 flex-grow-1 text-truncate" title={name} variant={type}>
         <span className="me-3">#</span>
         {name}
       </Button>

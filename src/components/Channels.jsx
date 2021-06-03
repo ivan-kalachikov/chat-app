@@ -12,9 +12,11 @@ const Channels = () => {
   const { t } = useTranslation();
   const channelsList = useSelector((state) => state.channelsInfo.channels);
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
+
   const addChannelHandler = () => {
     dispatch(openModal({ type: 'addChannel' }));
   };
+
   return (
     <Col xs={2} className="px-0 pt-5 border-end overflow-auto h-100 bg-light">
       <div className="d-flex justify-content-between mb-2 px-4">
@@ -26,17 +28,13 @@ const Channels = () => {
       <Nav as="ul" variant="pills" className="flex-column nav-pills nav-fill">
         {channelsList && channelsList.map(({ id, name, removable }) => {
           const props = {
-            key: id,
-            name,
-            id,
-            isActive: id === currentChannelId,
+            key: id, name, id, isActive: id === currentChannelId,
           };
           return removable
             ? <ChannelItemEditable key={id} commonProps={props} />
             : <ChannelItem key={id} commonProps={props} />;
         })}
       </Nav>
-      {/* <ModalNewChannel /> */}
     </Col>
   );
 };

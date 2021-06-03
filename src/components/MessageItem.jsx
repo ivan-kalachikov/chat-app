@@ -6,7 +6,7 @@ const MessageItem = ({ username, body, isFirst }) => {
     if (msgRef.current) {
       msgRef.current.scrollIntoView();
     }
-  });
+  }, []);
   return (
     <div className={`text-break mb-2 ${isFirst && 'mt-auto'}`} ref={msgRef}>
       <b>{username}</b>

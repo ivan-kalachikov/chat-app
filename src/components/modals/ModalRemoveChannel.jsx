@@ -40,10 +40,12 @@ const ModalRemoveChannel = () => {
       2500,
     ));
   };
+
   const hideHandler = () => {
     setRequestStatus('idle');
     dispatch(closeModal());
   };
+
   return (
     <Modal
       show={isOpen && modalType === TYPE}

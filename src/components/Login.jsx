@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   ErrorMessage, Formik,
 } from 'formik';
@@ -13,8 +13,7 @@ import routes from '../routes';
 import AuthContext from './AuthContext.jsx';
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
-  const [authData, setAuthData] = useState(null);
+  const { auth, setAuth } = useContext(AuthContext);
   const { t } = useTranslation();
 
   const validationSchema = Yup.object().shape({
@@ -32,14 +31,14 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (!authData) {
+    if (!auth.token) {
       return;
     }
-    const { token, username } = authData;
+    const { token, username } = auth;
     localStorage.setItem('authToken', token);
     localStorage.setItem('username', username);
     setAuth({ authToken: token, username });
-  }, [authData]);
+  }, [auth]);
 
   const authenticate = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.login();
@@ -47,7 +46,7 @@ const Login = () => {
     try {
       const response = await axios.post(url, data);
       const { token, username } = response.data;
-      setAuthData({ token, username });
+      setAuth({ token, username });
       setSubmitting(false);
     } catch (e) {
       if (e.response?.status === 401) {
@@ -130,5 +129,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// todo Network error

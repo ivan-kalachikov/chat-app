@@ -12,21 +12,17 @@ const Chat = () => {
   const { authToken } = auth;
   const dispatch = useDispatch();
   useEffect(() => {
-    socketWatcher(dispatch);
     dispatch(setInitialState(authToken));
+    socketWatcher(dispatch);
   }, [authToken]);
 
   return (
-    <AuthContext.Consumer>
-      {() => (
-        <Container className="my-4 overflow-hidden flex-grow-1 rounded shadow">
-          <Row className="h-100 overflow-auto bg-white">
-            <Channels />
-            <Messages />
-          </Row>
-        </Container>
-      )}
-    </AuthContext.Consumer>
+    <Container className="my-4 overflow-hidden flex-grow-1 rounded shadow">
+      <Row className="h-100 overflow-auto bg-white">
+        <Channels />
+        <Messages />
+      </Row>
+    </Container>
   );
 };
 

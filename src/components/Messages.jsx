@@ -11,6 +11,8 @@ const Messages = () => {
   const channels = useSelector((state) => state.channelsInfo.channels);
   const messages = useSelector((state) => state.messagesInfo.messages
     .filter(({ channelId }) => channelId === currentChannelId));
+  const currentChannelName = channels.find(({ id }) => id === currentChannelId)?.name;
+  const messagesCount = messages.length;
 
   return (
     <Col className="p-0 h-100">
@@ -18,10 +20,10 @@ const Messages = () => {
         <div className="bg-light p-3 shadow-sm small">
           <p className="m-0">
             <b>
-              {!!channels.length && `# ${channels.find(({ id }) => id === currentChannelId)?.name}`}
+              {!!channels.length && `# ${currentChannelName}`}
             </b>
           </p>
-          <span className="text-muted">{t('ui.messages.count', { count: messages.length })}</span>
+          <span className="text-muted">{t('ui.messages.count', { count: messagesCount })}</span>
         </div>
         <div id="messages-box" className="chat-messages px-5 d-flex flex-grow-1 flex-column overflow-auto">
           {messages && messages.map(({ username: name, body, id }, i) => (

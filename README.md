@@ -11,21 +11,19 @@ Real-time приложение на React/Redux.
 (REST, JWT, websockets, React (с хуками), Redux (@reduxjs/toolkit), Formik, rollbar, heroku)
 
 ---
-## Приложение:
+## Приложение
 https://hexlet-chat-app.herokuapp.com/
 
 ---
-### `npm ci` of `make install`
-
+## Установка и запуск
+#### `npm ci` of `make install`
 Установка приложения
 
----
-### `npm run start`  or  `make start`
-
+#### `npm run start`  or  `make start`
 Запуск бекенда и фронтенда ( [http://localhost:5000](http://localhost:5000) )
 
 ---
-## Точки входа:
+## Точки входа
 
 Сервер: `bin/slack.js` 
 

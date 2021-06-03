@@ -6,15 +6,14 @@ import {
 } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import AuthContext from './AuthContext.jsx';
+import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
 import socket from '../socket';
 import ackWithTimeout from '../utils';
 import SendIcon from '../images/send.svg';
 
 const MessageForm = () => {
   const { t } = useTranslation();
-  const { auth } = useContext(AuthContext);
-  const { username } = auth;
+  const { authUsername } = useContext(AuthUsernameContext);
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const inputRef = useRef(null);
 
@@ -49,7 +48,7 @@ const MessageForm = () => {
   const submitHandler = ({ message }, {
     resetForm, setSubmitting, setTouched, setFieldError,
   }) => {
-    const newMsg = { body: message, channelId: currentChannelId, username };
+    const newMsg = { body: message, channelId: currentChannelId, username: authUsername };
     socket.volatile.emit(
       'newMessage',
       newMsg,

@@ -2,15 +2,18 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Container } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import AuthContext from './AuthContext.jsx';
+import AuthTokenContext from '../context/AuthTokenContext.jsx';
+import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
 import socket from '../socket';
 
 const Header = () => {
   const { t } = useTranslation();
-  const { auth, setAuth } = useContext(AuthContext);
+  const { authToken, setAuthToken } = useContext(AuthTokenContext);
+  const { setAuthUsername } = useContext(AuthUsernameContext);
   const exitClickHandler = () => {
     localStorage.removeItem('authToken');
-    setAuth({ authToken: null, username: null });
+    setAuthToken(null);
+    setAuthUsername(null);
     socket.removeAllListeners();
     socket.disconnect();
   };
@@ -18,7 +21,7 @@ const Header = () => {
     <Navbar expand="lg" bg="white" className="shadow-sm">
       <Container>
         <Link className="navbar-brand" to="/">{t('ui.header.title')}</Link>
-        {auth.authToken && <button onClick={exitClickHandler} type="button" className="btn btn-primary">{t('ui.header.logout')}</button>}
+        {authToken && <button onClick={exitClickHandler} type="button" className="btn btn-primary">{t('ui.header.logout')}</button>}
       </Container>
     </Navbar>
   );

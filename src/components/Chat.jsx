@@ -1,15 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
-import AuthContext from './AuthContext.jsx';
-import Channels from './Channels.jsx';
-import Messages from './Messages.jsx';
+import AuthTokenContext from '../context/AuthTokenContext.jsx';
 import { setInitialState } from '../slices/channelsSlice';
 import { socketWatcher } from '../socket';
+import Channels from './Channels.jsx';
+import Messages from './Messages.jsx';
 
 const Chat = () => {
-  const { auth } = useContext(AuthContext);
-  const { authToken } = auth;
+  const { authToken } = useContext(AuthTokenContext);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setInitialState(authToken));

@@ -12,7 +12,8 @@ import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Chat from './components/Chat.jsx';
 import Modals from './components/modals/Modals.jsx';
-import AuthContext from './components/AuthContext.jsx';
+import AuthTokenContext from './context/AuthTokenContext.jsx';
+import AuthUsernameContext from './context/AuthUsernameContext.jsx';
 
 import channelsReducer from './slices/channelsSlice';
 import messagesReducer from './slices/messagesSlice';
@@ -29,36 +30,36 @@ const store = configureStore({
 });
 
 const App = () => {
-  const authToken = localStorage.getItem('authToken');
+  const token = localStorage.getItem('authToken');
   const username = localStorage.getItem('username');
-  const [auth, setAuth] = useState({
-    authToken,
-    username,
-  });
+  const [authToken, setAuthToken] = useState(token);
+  const [authUsername, setAuthUsername] = useState(username);
 
   return (
     <Provider store={store}>
       <div className="d-flex flex-column h-100">
-        <AuthContext.Provider value={{ auth, setAuth }}>
-          <Router>
-            <Header />
-            <Switch>
-              <Route exact path="/">
-                { authToken ? <Chat /> : <Redirect to="/login" /> }
-              </Route>
-              <Route exact path="/login">
-                {authToken ? <Redirect to="/" /> : <Login />}
-              </Route>
-              <Route exact path="/signup">
-                {authToken ? <Redirect to="/" /> : <Signup />}
-              </Route>
-              <Route path="*">
-                <Page404 />
-              </Route>
-            </Switch>
-            <Modals />
-          </Router>
-        </AuthContext.Provider>
+        <AuthTokenContext.Provider value={{ authToken, setAuthToken }}>
+          <AuthUsernameContext.Provider value={{ authUsername, setAuthUsername }}>
+            <Router>
+              <Header />
+              <Switch>
+                <Route exact path="/">
+                  { authToken ? <Chat /> : <Redirect to="/login" /> }
+                </Route>
+                <Route exact path="/login">
+                  {authToken ? <Redirect to="/" /> : <Login />}
+                </Route>
+                <Route exact path="/signup">
+                  {authToken ? <Redirect to="/" /> : <Signup />}
+                </Route>
+                <Route path="*">
+                  <Page404 />
+                </Route>
+              </Switch>
+              <Modals />
+            </Router>
+          </AuthUsernameContext.Provider>
+        </AuthTokenContext.Provider>
       </div>
     </Provider>
   );

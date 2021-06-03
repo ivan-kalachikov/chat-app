@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   ErrorMessage, Formik,
 } from 'formik';
@@ -10,10 +10,13 @@ import {
   Container, Row, Col, Card, Form, Button,
 } from 'react-bootstrap';
 import routes from '../routes';
-import AuthContext from './AuthContext.jsx';
+import AuthTokenContext from '../context/AuthTokenContext.jsx';
+import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
 
 const Login = () => {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuthToken } = useContext(AuthTokenContext);
+  const { setAuthUsername } = useContext(AuthUsernameContext);
+  const [authData, setAuthData] = useState(null);
   const { t } = useTranslation();
 
   const validationSchema = Yup.object().shape({
@@ -31,22 +34,23 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (!auth.token) {
+    if (!authData) {
       return;
     }
-    const { token, username } = auth;
+    const { token, username } = authData;
     localStorage.setItem('authToken', token);
     localStorage.setItem('username', username);
-    setAuth({ authToken: token, username });
-  }, [auth]);
+    setAuthToken(token);
+    setAuthUsername(username);
+  }, [authData]);
 
   const authenticate = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.login();
     setSubmitting(true);
     try {
       const response = await axios.post(url, data);
-      const { token, username } = response.data;
-      setAuth({ token, username });
+      const responseData = response.data;
+      setAuthData(responseData);
       setSubmitting(false);
     } catch (e) {
       if (e.response?.status === 401) {

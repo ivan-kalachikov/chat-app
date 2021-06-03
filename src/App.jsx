@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';
-import i18n from './i18n';
+import './i18n';
 
 import Page404 from './components/Page404.jsx';
 import Header from './components/Header.jsx';

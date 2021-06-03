@@ -26,7 +26,7 @@ const socketWatcher = (dispatch) => {
   });
 
   socket.on('connect_error', () => {
-    console.log('ERROR CONNECTION');
+    console.log('CONNECT ERROR');
   });
 
   socket.on('disconnect', (reason) => {

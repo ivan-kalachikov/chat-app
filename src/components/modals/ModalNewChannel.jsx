@@ -108,6 +108,7 @@ const ModalAddChannel = () => {
                 innerRef={inputRef}
                 disabled={isSubmitting}
                 autoComplete="off"
+                data-testid="add-channel"
                 className={`form-control ${errors.channelName && touched.channelName && 'is-invalid'}`}
               />
               <ErrorMessage className="invalid-tooltip" name="channelName" component="div" />

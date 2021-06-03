@@ -90,6 +90,7 @@ const MessageForm = () => {
                 placeholder={t('ui.messages.placeholder')}
                 onBlur={blurHandler(setTouched)}
                 required
+                data-testid="new-message"
               />
               <ErrorMessage className="invalid-tooltip top-0 translate-middle-y" name="message" component="div" />
               <Button onClick={submitForm} variant="" type="submit" title={t('ui.messages.send')} disabled={isSubmitting}>

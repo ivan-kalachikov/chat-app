@@ -1,8 +1,8 @@
 {
   "name": "@hexlet/code",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "Chat app on react.js and socket.io",
+  "main": "src/init.jsx",
   "type": "module",
   "engines": {
     "node": "14.x"
@@ -11,7 +11,9 @@
     "test": "echo 'no tests for this project'",
     "prebuild": "rm -rf dist",
     "build": "NODE_ENV=production npx webpack --mode production",
-    "start": "node bin/slack.js"
+    "start": "npm run start-backend & npm run start-frontend",
+    "start-backend": "npx nodemon bin/slack.js",
+    "start-frontend": "npx webpack serve"
   },
   "repository": {
     "type": "git",

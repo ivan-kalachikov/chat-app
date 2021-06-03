@@ -12,8 +12,9 @@ const Header = () => {
   const { setAuthUsername } = useContext(AuthUsernameContext);
   const exitClickHandler = () => {
     localStorage.removeItem('authToken');
-    setAuthToken(null);
+    localStorage.removeItem('username');
     setAuthUsername(null);
+    setAuthToken(null);
     socket.removeAllListeners();
     socket.disconnect();
   };

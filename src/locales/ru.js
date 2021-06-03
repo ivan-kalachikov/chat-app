@@ -2,12 +2,10 @@ export default {
   translation: {
     errors: {
       required: 'Обязательное поле',
-      min_0: 'Минимум {{count}} символ',
-      min_1: 'Минимум {{count}} символа',
-      min_2: 'Минимум {{count}} символов',
-      max_0: 'Максимум {{count}} символ',
-      max_1: 'Максимум {{count}} символа',
-      max_2: 'Максимум {{count}} символов',
+      min_0: 'Не менее {{count}} символ',
+      min_1: 'Не менее {{count}} символа',
+      min_2: 'Не менее {{count}} символов',
+      minmax: 'От {{min}} до {{max}} символов',
       networkError: 'Ошибка сети',
       equalPasswords: 'Пароли должны совпадать',
       userAlreadyExist: 'Пользователь с таким именем уже существует',

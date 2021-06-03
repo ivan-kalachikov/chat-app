@@ -20,15 +20,14 @@ const Signup = () => {
     username: Yup.string()
       .trim()
       .required()
-      .min(3)
-      .max(20),
+      .minmax(3, 20),
     password: Yup.string()
       .trim()
       .min(6)
       .required(),
     passwordConfirmation: Yup.string()
       .trim()
-      .oneOf([Yup.ref('password'), null]),
+      .equalPasswords(Yup.ref('password')),
   });
 
   const initialValues = {

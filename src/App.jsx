@@ -35,6 +35,7 @@ const App = ({ socketClient }) => {
   const username = localStorage.getItem('username');
   const [authToken, setAuthToken] = useState(token);
   const [authUsername, setAuthUsername] = useState(username);
+  console.log(socketClient);
   const socket = socketClient({
     autoConnect: false,
   });

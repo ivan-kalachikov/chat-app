@@ -35,16 +35,10 @@ const ModalAddChannel = () => {
     channelName: '',
   };
 
-  const onSuccessSend = (
-    resetForm,
-    setSubmitting,
-    setTouched,
-    setFieldError,
-  ) => ({ status, data }) => {
+  const onSuccessSend = (resetForm, setSubmitting, setFieldError) => ({ status, data }) => {
     if (status === 'ok') {
       dispatch(setCurrentChannel({ id: data.id }));
       resetForm();
-      setTouched({ channelName: false });
       dispatch(closeModal());
     } else {
       setFieldError('channelName', t('errors.networkError'));
@@ -59,12 +53,12 @@ const ModalAddChannel = () => {
   };
 
   const submitHandler = (formData, {
-    resetForm, setFieldError, setSubmitting, setTouched,
+    resetForm, setFieldError, setSubmitting,
   }) => {
     setSubmitting(true);
     const name = formData.channelName;
     socket.volatile.emit('newChannel', { name }, ackWithTimeout(
-      onSuccessSend(resetForm, setSubmitting, setTouched, setFieldError),
+      onSuccessSend(resetForm, setSubmitting, setFieldError),
       onFailSend(setSubmitting, setFieldError),
       2500,
     ));

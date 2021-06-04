@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "0.0.1",
   "description": "Chat app on react.js and socket.io",
-  "main": "src/App.jsx",
+  "main": "src/index.js",
   "type": "module",
   "engines": {
     "node": "14.x"

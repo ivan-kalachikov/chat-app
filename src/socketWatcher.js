@@ -3,7 +3,6 @@ import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice
 
 const socketWatcher = (socket, dispatch) => {
   socket.on('newMessage', (response) => {
-    console.log('response from socket watcher', response);
     dispatch(addMessage(response));
   });
 

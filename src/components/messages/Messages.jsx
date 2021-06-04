@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Col } from 'react-bootstrap';
+import uniqueId from 'lodash/uniqueId';
 import MessageItem from './MessageItem.jsx';
 import MessageForm from './MessageForm.jsx';
 
@@ -26,8 +27,8 @@ const Messages = () => {
           <span className="text-muted">{t('ui.messages.count', { count: messagesCount })}</span>
         </div>
         <div id="messages-box" className="chat-messages px-5 d-flex flex-grow-1 flex-column overflow-auto">
-          {messages && messages.map(({ username: name, body, id }, i) => (
-            <MessageItem key={id} body={body} username={name} isFirst={i === 0} />
+          {messages && messages.map(({ username: name, body }, i) => (
+            <MessageItem key={uniqueId()} body={body} username={name} isFirst={i === 0} />
           ))}
         </div>
         <MessageForm />

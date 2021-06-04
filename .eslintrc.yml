@@ -9,6 +9,7 @@ extends:
   - airbnb
   - "plugin:functional/external-recommended"
   - "plugin:functional/recommended"
+  - "plugin:react-hooks/recommended"
 
 parser: babel-eslint
 
@@ -45,8 +46,4 @@ rules:
       some: [ 'nesting', 'id' ]
     }
   } ]
-  no-param-reassign: ['error', { 
-    props: true,
-    ignorePropertyModificationsFor: ['state'] 
-  }]
 

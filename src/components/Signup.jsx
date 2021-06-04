@@ -48,7 +48,7 @@ const Signup = () => {
     localStorage.setItem('username', username);
     setAuthToken(token);
     setAuthUsername(username);
-  }, [authData]);
+  });
 
   const registration = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.signup();

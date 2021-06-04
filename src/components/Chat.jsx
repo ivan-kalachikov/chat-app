@@ -15,7 +15,7 @@ const Chat = () => {
   useEffect(() => {
     dispatch(setInitialState(authToken));
     socketWatcher(socket, dispatch);
-  }, [authToken]);
+  });
 
   return (
     <Container className="my-4 overflow-hidden flex-grow-1 rounded shadow">

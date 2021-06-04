@@ -25,6 +25,7 @@ const socketWatcher = (socket, dispatch) => {
 
   socket.on('disconnect', (reason) => {
     console.log('DISCONNECT', reason);
+    socket.removeAllListeners();
   });
 };
 

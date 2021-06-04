@@ -21,7 +21,7 @@ const Channels = () => {
     <Col xs={2} className="px-0 pt-5 border-end overflow-auto h-100 bg-light">
       <div className="d-flex justify-content-between mb-2 px-4">
         <span>{t('ui.channels.title')}</span>
-        <Button onClick={addChannelHandler} variant="" title={t('ui.channels.add')} className="ml-auto p-0 text-primary btn-group-vertical">
+        <Button onClick={addChannelHandler} variant="" className="ml-auto p-0 text-primary btn-group-vertical">
           +
         </Button>
       </div>

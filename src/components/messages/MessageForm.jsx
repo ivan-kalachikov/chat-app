@@ -6,10 +6,10 @@ import {
 } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
-import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
-import ackWithTimeout from '../utils';
-import SendIcon from '../images/send.svg';
+import AuthUsernameContext from '../../context/AuthUsernameContext.jsx';
+import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
+import ackWithTimeout from '../../utils';
+import SendIcon from '../../images/send.svg';
 
 const MessageForm = () => {
   const { t } = useTranslation();

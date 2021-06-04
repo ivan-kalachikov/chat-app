@@ -5,8 +5,8 @@ import AuthTokenContext from '../context/AuthTokenContext.jsx';
 import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
 import { setInitialState } from '../slices/channelsSlice';
 import socketWatcher from '../socketWatcher';
-import Channels from './Channels.jsx';
-import Messages from './Messages.jsx';
+import Channels from './channels/Channels.jsx';
+import Messages from './messages/Messages.jsx';
 
 const Chat = () => {
   const { authToken } = useContext(AuthTokenContext);

@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 const MessageItem = ({ username, body, isFirst }) => {
   const msgRef = useRef(null);
   useEffect(() => {
-    if (msgRef.current) {
+    if (msgRef.current && msgRef.current.scrollIntoView) {
       msgRef.current.scrollIntoView();
     }
   }, []);

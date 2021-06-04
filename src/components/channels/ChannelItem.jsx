@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { setCurrentChannel } from '../slices/channelsSlice';
+import { setCurrentChannel } from '../../slices/channelsSlice';
 
 const ChannelItem = ({ commonProps }) => {
   const { name, id, isActive } = commonProps;

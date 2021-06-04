@@ -28,9 +28,8 @@ const MessageForm = () => {
     message: '',
   };
 
-  const onSuccessSend = (resetForm, setSubmitting, setTouched, setFieldError) => ({ status }) => {
+  const onSuccessSend = (setSubmitting, setTouched, setFieldError) => ({ status }) => {
     if (status === 'ok') {
-      resetForm();
       setTouched({ message: false });
     } else {
       setFieldError('message', t('errors.networkError'));
@@ -47,14 +46,14 @@ const MessageForm = () => {
   };
 
   const submitHandler = ({ message }, {
-    resetForm, setSubmitting, setTouched, setFieldError,
+    setSubmitting, setTouched, setFieldError,
   }) => {
     const newMsg = { body: message, channelId: currentChannelId, username: authUsername };
     socket.volatile.emit(
       'newMessage',
       newMsg,
       ackWithTimeout(
-        onSuccessSend(resetForm, setSubmitting, setTouched, setFieldError),
+        onSuccessSend(setSubmitting, setTouched, setFieldError),
         onFailSend(setSubmitting, setFieldError),
         3000,
       ),

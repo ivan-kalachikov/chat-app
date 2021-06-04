@@ -16,7 +16,6 @@ const Header = () => {
     localStorage.removeItem('username');
     setAuthUsername(null);
     setAuthToken(null);
-    socket.removeAllListeners();
   };
   return (
     <Navbar expand="lg" bg="white" className="shadow-sm">

@@ -88,7 +88,6 @@ const Login = () => {
                         name="username"
                         id="username"
                         autoComplete="username"
-                        required
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.username}
@@ -104,7 +103,6 @@ const Login = () => {
                         name="password"
                         id="password"
                         autoComplete="off"
-                        required
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.password}

@@ -94,7 +94,6 @@ const Signup = () => {
                         name="username"
                         id="username"
                         autoComplete="username"
-                        required
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.username}
@@ -110,7 +109,6 @@ const Signup = () => {
                         name="password"
                         id="password"
                         autoComplete="off"
-                        required
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.password}
@@ -126,7 +124,6 @@ const Signup = () => {
                         name="passwordConfirmation"
                         id="passwordConfirmation"
                         autoComplete="off"
-                        required
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.passwordConfirmation}

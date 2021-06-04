@@ -21,9 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const init = async () => {
-  const socket = io({
-    autoConnect: false,
-  });
+  const socket = io();
   const container = document.querySelector('#chat');
   ReactDOM.render(await initApp(socket), container);
 };

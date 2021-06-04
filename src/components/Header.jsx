@@ -17,7 +17,6 @@ const Header = () => {
     setAuthUsername(null);
     setAuthToken(null);
     socket.removeAllListeners();
-    socket.disconnect();
   };
   return (
     <Navbar expand="lg" bg="white" className="shadow-sm">

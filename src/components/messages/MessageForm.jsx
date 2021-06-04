@@ -89,7 +89,6 @@ const MessageForm = () => {
                 autoComplete="off"
                 placeholder={t('ui.messages.placeholder')}
                 onBlur={blurHandler(setTouched)}
-                required
                 data-testid="new-message"
               />
               <ErrorMessage className="invalid-tooltip top-0 translate-middle-y" name="message" component="div" />

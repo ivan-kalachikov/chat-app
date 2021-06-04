@@ -28,8 +28,7 @@ const ModalAddChannel = () => {
       .trim()
       .required()
       .notOneOf(channelsNames)
-      .min(3)
-      .max(20),
+      .minmax(3, 20),
   });
 
   const initialValues = {

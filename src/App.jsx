@@ -30,15 +30,11 @@ const store = configureStore({
   reducer,
 });
 
-const App = ({ socketClient }) => {
+const App = ({ socket }) => {
   const token = localStorage.getItem('authToken');
   const username = localStorage.getItem('username');
   const [authToken, setAuthToken] = useState(token);
   const [authUsername, setAuthUsername] = useState(username);
-  console.log(socketClient);
-  const socket = socketClient({
-    autoConnect: false,
-  });
 
   return (
     <Provider store={store}>

@@ -35,6 +35,7 @@ const App = ({ socket }) => {
   const username = localStorage.getItem('username');
   const [authToken, setAuthToken] = useState(token);
   const [authUsername, setAuthUsername] = useState(username);
+  socket.removeAllListeners();
 
   return (
     <Provider store={store}>

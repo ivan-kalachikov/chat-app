@@ -50,6 +50,7 @@ const MessageForm = () => {
     resetForm, setSubmitting, setTouched, setFieldError,
   }) => {
     const newMsg = { body: message, channelId: currentChannelId, username: authUsername };
+    console.log('newMsg from message form', newMsg);
     socket.volatile.emit(
       'newMessage',
       newMsg,

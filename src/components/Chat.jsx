@@ -14,8 +14,6 @@ const Chat = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setInitialState(authToken));
-    socket.removeAllListeners();
-    socket.connect();
     socketWatcher(socket, dispatch);
   }, [authToken]);
 

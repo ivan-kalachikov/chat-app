@@ -110,7 +110,7 @@ const ModalAddChannel = () => {
           </Modal.Body>
           <Modal.Footer className="border-0">
             <Button onClick={cancelHandler(resetForm)} variant="secondary">{t('ui.channels.cancel')}</Button>
-            <Button onClick={submitForm} variant="primary" type="submit" disabled={isSubmitting}>{t('ui.channels.add')}</Button>
+            <Button onClick={submitForm} variant="primary" type="submit" disabled={isSubmitting}>{t('ui.channels.send')}</Button>
           </Modal.Footer>
         </Modal>
       )}

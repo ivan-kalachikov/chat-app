@@ -8,7 +8,6 @@ import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
 
 const Header = () => {
   const { t } = useTranslation();
-  const socket = useContext(SocketInstanceContext);
   const { authToken, setAuthToken } = useContext(AuthTokenContext);
   const { setAuthUsername } = useContext(AuthUsernameContext);
   const exitClickHandler = () => {

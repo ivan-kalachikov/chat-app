@@ -23,6 +23,7 @@ const Channels = () => {
         <span>{t('ui.channels.title')}</span>
         <Button onClick={addChannelHandler} variant="link" title={t('ui.channels.add')} className="ml-auto p-0 btn-group-vertical">
           <AddIcon />
+          <span className="visually-hidden">+</span>
         </Button>
       </div>
       <Nav as="ul" variant="pills" className="flex-column nav-pills nav-fill">

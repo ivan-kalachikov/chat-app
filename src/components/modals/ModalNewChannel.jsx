@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import {
@@ -7,13 +7,14 @@ import {
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import socket from '../../socket';
+import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
 import { closeModal } from '../../slices/modalSlice';
 import { setCurrentChannel } from '../../slices/channelsSlice';
 import ackWithTimeout from '../../utils';
 
 const ModalAddChannel = () => {
   const { t } = useTranslation();
+  const socket = useContext(SocketInstanceContext);
   const TYPE = 'addChannel';
   const inputRef = useRef(null);
   const channels = useSelector((state) => state.channelsInfo.channels);

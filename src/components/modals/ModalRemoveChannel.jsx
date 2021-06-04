@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import socket from '../../socket';
+import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
 import { closeModal } from '../../slices/modalSlice';
 import ackWithTimeout from '../../utils';
 
 const ModalRemoveChannel = () => {
   const { t } = useTranslation();
+  const socket = useContext(SocketInstanceContext);
   const TYPE = 'removeChannel';
   const isOpen = useSelector((state) => state.modal.isOpen);
   const modalType = useSelector((state) => state.modal.type);

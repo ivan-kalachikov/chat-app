@@ -1,13 +1,9 @@
-import { io } from 'socket.io-client';
 import { addMessage, removeChannelMessages } from './slices/messagesSlice.js';
 import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice.js';
 
-const socket = io({
-  autoConnect: false,
-});
-
-const socketWatcher = (dispatch) => {
+const socketWatcher = (socket, dispatch) => {
   socket.connect();
+
   socket.on('newMessage', (response) => {
     dispatch(addMessage(response));
   });
@@ -34,6 +30,4 @@ const socketWatcher = (dispatch) => {
   });
 };
 
-export default socket;
-
-export { socketWatcher };
+export default socketWatcher;

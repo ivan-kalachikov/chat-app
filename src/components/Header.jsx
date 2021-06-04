@@ -4,10 +4,11 @@ import { Navbar, Container } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import AuthTokenContext from '../context/AuthTokenContext.jsx';
 import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
-import socket from '../socket';
+import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
 
 const Header = () => {
   const { t } = useTranslation();
+  const socket = useContext(SocketInstanceContext);
   const { authToken, setAuthToken } = useContext(AuthTokenContext);
   const { setAuthUsername } = useContext(AuthUsernameContext);
   const exitClickHandler = () => {

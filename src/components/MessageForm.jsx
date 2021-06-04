@@ -7,12 +7,13 @@ import {
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
 import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
-import socket from '../socket';
+import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
 import ackWithTimeout from '../utils';
 import SendIcon from '../images/send.svg';
 
 const MessageForm = () => {
   const { t } = useTranslation();
+  const socket = useContext(SocketInstanceContext);
   const { authUsername } = useContext(AuthUsernameContext);
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const inputRef = useRef(null);

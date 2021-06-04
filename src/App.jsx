@@ -14,6 +14,7 @@ import Chat from './components/Chat.jsx';
 import Modals from './components/modals/Modals.jsx';
 import AuthTokenContext from './context/AuthTokenContext.jsx';
 import AuthUsernameContext from './context/AuthUsernameContext.jsx';
+import SocketInstanceContext from './context/SocketInstanceContext.jsx';
 
 import channelsReducer from './slices/channelsSlice';
 import messagesReducer from './slices/messagesSlice';
@@ -29,35 +30,40 @@ const store = configureStore({
   reducer,
 });
 
-const App = () => {
+const App = ({ socketClient }) => {
   const token = localStorage.getItem('authToken');
   const username = localStorage.getItem('username');
   const [authToken, setAuthToken] = useState(token);
   const [authUsername, setAuthUsername] = useState(username);
+  const socket = socketClient({
+    autoConnect: false,
+  });
 
   return (
     <Provider store={store}>
       <div className="d-flex flex-column h-100">
         <AuthTokenContext.Provider value={{ authToken, setAuthToken }}>
           <AuthUsernameContext.Provider value={{ authUsername, setAuthUsername }}>
-            <Router>
-              <Header />
-              <Switch>
-                <Route exact path="/">
-                  { authToken ? <Chat /> : <Redirect to="/login" /> }
-                </Route>
-                <Route exact path="/login">
-                  {authToken ? <Redirect to="/" /> : <Login />}
-                </Route>
-                <Route exact path="/signup">
-                  {authToken ? <Redirect to="/" /> : <Signup />}
-                </Route>
-                <Route path="*">
-                  <Page404 />
-                </Route>
-              </Switch>
-              <Modals />
-            </Router>
+            <SocketInstanceContext.Provider value={socket}>
+              <Router>
+                <Header />
+                <Switch>
+                  <Route exact path="/">
+                    { authToken ? <Chat /> : <Redirect to="/login" /> }
+                  </Route>
+                  <Route exact path="/login">
+                    {authToken ? <Redirect to="/" /> : <Login />}
+                  </Route>
+                  <Route exact path="/signup">
+                    {authToken ? <Redirect to="/" /> : <Signup />}
+                  </Route>
+                  <Route path="*">
+                    <Page404 />
+                  </Route>
+                </Switch>
+                <Modals />
+              </Router>
+            </SocketInstanceContext.Provider>
           </AuthUsernameContext.Provider>
         </AuthTokenContext.Provider>
       </div>

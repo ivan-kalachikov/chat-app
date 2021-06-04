@@ -45,6 +45,7 @@ export default {
         removeTitle: 'Удалить канал',
         renameTitle: 'Переименовать канал',
         confirmation: 'Вы уверены?',
+        send: 'Отправить',
       },
       messages: {
         count_0: '{{count}} Сообщение',

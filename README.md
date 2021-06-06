@@ -19,7 +19,7 @@ https://hexlet-chat-app.herokuapp.com/
 #### `npm ci` of `make install`
 Установка приложения
 
-#### `npm run start`  or  `make start`
+#### `npm run start-dev`  or  `make start`
 Запуск бекенда и фронтенда ( [http://localhost:5000](http://localhost:5000) )
 
 ---

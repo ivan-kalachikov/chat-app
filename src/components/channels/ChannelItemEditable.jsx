@@ -4,8 +4,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { setCurrentChannel } from '../../slices/channelsSlice';
-import { openModal } from '../../slices/modalSlice';
+import { setCurrentChannel } from '../../slices/channels';
+import { openModal } from '../../slices/modal';
 
 const ChannelItemEditable = ({ commonProps }) => {
   const { t } = useTranslation();

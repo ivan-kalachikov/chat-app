@@ -1,5 +1,5 @@
-import { addMessage, removeChannelMessages } from './slices/messagesSlice.js';
-import { addChannel, removeChannel, renameChannel } from './slices/channelsSlice.js';
+import { addMessage, removeChannelMessages } from './slices/messages.js';
+import { addChannel, removeChannel, renameChannel } from './slices/channels.js';
 
 const socketWatcher = (socket, dispatch) => {
   socket.on('newMessage', (response) => {

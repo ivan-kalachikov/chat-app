@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import ChannelItem from './ChannelItem.jsx';
 import ChannelItemEditable from './ChannelItemEditable.jsx';
 import AddIcon from '../../images/add.svg';
-import { openModal } from '../../slices/modalSlice';
+import { openModal } from '../../slices/modal';
 
 const Channels = () => {
   const dispatch = useDispatch();

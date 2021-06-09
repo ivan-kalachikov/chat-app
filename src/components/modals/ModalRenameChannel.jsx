@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
-import { closeModal } from '../../slices/modalSlice';
+import { closeModal } from '../../slices/modal';
 import ackWithTimeout from '../../utils';
 
 const ModalRenameChannel = () => {

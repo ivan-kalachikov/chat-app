@@ -16,9 +16,9 @@ import AuthTokenContext from './context/AuthTokenContext.jsx';
 import AuthUsernameContext from './context/AuthUsernameContext.jsx';
 import SocketInstanceContext from './context/SocketInstanceContext.jsx';
 
-import channelsReducer from './slices/channelsSlice';
-import messagesReducer from './slices/messagesSlice';
-import modalReducer from './slices/modalSlice';
+import channelsReducer from './slices/channels';
+import messagesReducer from './slices/messages';
+import modalReducer from './slices/modal';
 
 const reducer = {
   channelsInfo: channelsReducer,

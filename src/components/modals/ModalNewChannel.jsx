@@ -8,8 +8,8 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
-import { closeModal } from '../../slices/modalSlice';
-import { setCurrentChannel } from '../../slices/channelsSlice';
+import { closeModal } from '../../slices/modal';
+import { setCurrentChannel } from '../../slices/channels';
 import ackWithTimeout from '../../utils';
 
 const ModalAddChannel = () => {

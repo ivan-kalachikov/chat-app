@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
 import AuthTokenContext from '../context/AuthTokenContext.jsx';
 import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
-import { setInitialState } from '../slices/channelsSlice';
+import { setInitialState } from '../slices/channels';
 import socketWatcher from '../socketWatcher';
 import Channels from './channels/Channels.jsx';
 import Messages from './messages/Messages.jsx';

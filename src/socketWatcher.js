@@ -1,4 +1,4 @@
-import { addMessage, removeChannelMessages } from './slices/messages.js';
+import { addMessage } from './slices/messages.js';
 import { addChannel, removeChannel, renameChannel } from './slices/channels.js';
 
 const socketWatcher = (socket, dispatch) => {
@@ -12,7 +12,6 @@ const socketWatcher = (socket, dispatch) => {
 
   socket.on('removeChannel', (response) => {
     dispatch(removeChannel(response));
-    dispatch(removeChannelMessages({ channelId: response.id }));
   });
 
   socket.on('renameChannel', (response) => {

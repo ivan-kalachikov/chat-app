@@ -30,6 +30,7 @@
     "classnames": "^2.3.1",
     "core-js": "^3.13.1",
     "debug": "^4.3.1",
+    "dotenv-webpack": "^7.0.3",
     "fastify": "^3.17.0",
     "fastify-formbody": "^5.0.0",
     "fastify-jwt": "^2.5.0",

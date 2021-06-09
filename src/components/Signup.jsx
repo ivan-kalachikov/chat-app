@@ -84,55 +84,57 @@ const Signup = () => {
                 }) => (
                   <Form onSubmit={handleSubmit}>
                     <h1 className="text-center mb-4">{t('ui.registration.title')}</h1>
-                    <Form.Floating className="mb-3">
-                      <Form.Control
-                        className={
+                    <fieldset disabled={isSubmitting}>
+                      <Form.Floating className="mb-3">
+                        <Form.Control
+                          className={
                           (errors.username || errors.username === null)
                            && touched.username && 'is-invalid'
                         }
-                        type="text"
-                        name="username"
-                        id="username"
-                        autoComplete="username"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.username}
-                        placeholder={t('ui.registration.username')}
-                      />
-                      <Form.Label htmlFor="username">{t('ui.registration.username')}</Form.Label>
-                      <ErrorMessage className="invalid-tooltip" name="username" component="div" />
-                    </Form.Floating>
-                    <Form.Floating className="mb-3">
-                      <Form.Control
-                        className={errors.password && touched.password && 'is-invalid'}
-                        type="password"
-                        name="password"
-                        id="password"
-                        autoComplete="off"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.password}
-                        placeholder={t('ui.registration.password')}
-                      />
-                      <Form.Label htmlFor="password">{t('ui.registration.password')}</Form.Label>
-                      <ErrorMessage className="invalid-tooltip" name="password" component="div" />
-                    </Form.Floating>
-                    <Form.Floating className="mb-3">
-                      <Form.Control
-                        className={errors.passwordConfirmation && touched.passwordConfirmation && 'is-invalid'}
-                        type="password"
-                        name="passwordConfirmation"
-                        id="passwordConfirmation"
-                        autoComplete="off"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.passwordConfirmation}
-                        placeholder={t('ui.registration.passwordConfirmation')}
-                      />
-                      <Form.Label htmlFor="passwordConfirmation">{t('ui.registration.passwordConfirmation')}</Form.Label>
-                      <ErrorMessage className="invalid-tooltip" name="passwordConfirmation" component="div" />
-                    </Form.Floating>
-                    <Button variant="outline-primary" className="w-100 py-3 mt-2" type="submit" disabled={isSubmitting}>{t('ui.registration.signUpButton')}</Button>
+                          type="text"
+                          name="username"
+                          id="username"
+                          autoComplete="username"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.username}
+                          placeholder={t('ui.registration.username')}
+                        />
+                        <Form.Label htmlFor="username">{t('ui.registration.username')}</Form.Label>
+                        <ErrorMessage className="invalid-tooltip" name="username" component="div" />
+                      </Form.Floating>
+                      <Form.Floating className="mb-3">
+                        <Form.Control
+                          className={errors.password && touched.password && 'is-invalid'}
+                          type="password"
+                          name="password"
+                          id="password"
+                          autoComplete="off"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.password}
+                          placeholder={t('ui.registration.password')}
+                        />
+                        <Form.Label htmlFor="password">{t('ui.registration.password')}</Form.Label>
+                        <ErrorMessage className="invalid-tooltip" name="password" component="div" />
+                      </Form.Floating>
+                      <Form.Floating className="mb-3">
+                        <Form.Control
+                          className={errors.passwordConfirmation && touched.passwordConfirmation && 'is-invalid'}
+                          type="password"
+                          name="passwordConfirmation"
+                          id="passwordConfirmation"
+                          autoComplete="off"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.passwordConfirmation}
+                          placeholder={t('ui.registration.passwordConfirmation')}
+                        />
+                        <Form.Label htmlFor="passwordConfirmation">{t('ui.registration.passwordConfirmation')}</Form.Label>
+                        <ErrorMessage className="invalid-tooltip" name="passwordConfirmation" component="div" />
+                      </Form.Floating>
+                      <Button variant="outline-primary" className="w-100 py-3 mt-2" type="submit">{t('ui.registration.signUpButton')}</Button>
+                    </fieldset>
                   </Form>
                 )}
               </Formik>

@@ -16,18 +16,10 @@ import AuthTokenContext from './context/AuthTokenContext.jsx';
 import AuthUsernameContext from './context/AuthUsernameContext.jsx';
 import SocketInstanceContext from './context/SocketInstanceContext.jsx';
 
-import channelsReducer from './slices/channels';
-import messagesReducer from './slices/messages';
-import modalReducer from './slices/modal';
-
-const reducer = {
-  channelsInfo: channelsReducer,
-  messagesInfo: messagesReducer,
-  modal: modalReducer,
-};
+import rootReducer from './slices/index';
 
 const store = configureStore({
-  reducer,
+  reducer: rootReducer,
 });
 
 const App = ({ socket }) => {

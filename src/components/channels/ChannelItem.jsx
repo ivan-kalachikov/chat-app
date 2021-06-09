@@ -1,14 +1,14 @@
 import React from 'react';
 import { Nav, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { setCurrentChannel } from '../../slices/channels';
+import { actions } from '../../slices';
 
 const ChannelItem = ({ commonProps }) => {
   const { name, id, isActive } = commonProps;
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    dispatch(setCurrentChannel({ id }));
+    dispatch(actions.setCurrentChannel({ id }));
   };
 
   return (

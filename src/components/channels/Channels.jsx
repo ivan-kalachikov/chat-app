@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import ChannelItem from './ChannelItem.jsx';
 import ChannelItemEditable from './ChannelItemEditable.jsx';
 import AddIcon from '../../images/add.svg';
-import { openModal } from '../../slices/modal';
+import { actions } from '../../slices';
 
 const Channels = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const Channels = () => {
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
 
   const addChannelHandler = () => {
-    dispatch(openModal({ type: 'addChannel' }));
+    dispatch(actions.openModal({ type: 'addChannel' }));
   };
 
   return (

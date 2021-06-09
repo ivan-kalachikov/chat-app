@@ -1,21 +1,20 @@
-import { addMessage } from './slices/messages.js';
-import { addChannel, removeChannel, renameChannel } from './slices/channels.js';
+import { actions } from './slices/index.js';
 
 const socketWatcher = (socket, dispatch) => {
   socket.on('newMessage', (response) => {
-    dispatch(addMessage(response));
+    dispatch(actions.addMessage(response));
   });
 
   socket.on('newChannel', (response) => {
-    dispatch(addChannel({ channel: response }));
+    dispatch(actions.addChannel({ channel: response }));
   });
 
   socket.on('removeChannel', (response) => {
-    dispatch(removeChannel(response));
+    dispatch(actions.removeChannel(response));
   });
 
   socket.on('renameChannel', (response) => {
-    dispatch(renameChannel({ channel: response }));
+    dispatch(actions.renameChannel({ channel: response }));
   });
 
   socket.on('connect_error', () => {

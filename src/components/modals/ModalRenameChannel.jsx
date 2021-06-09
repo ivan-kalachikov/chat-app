@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
-import { closeModal } from '../../slices/modal';
+import { actions } from '../../slices';
 import ackWithTimeout from '../../utils';
 
 const ModalRenameChannel = () => {
@@ -38,7 +38,7 @@ const ModalRenameChannel = () => {
   const onSuccessSend = (resetForm, setSubmitting, setFieldError) => ({ status }) => {
     if (status === 'ok') {
       resetForm();
-      dispatch(closeModal());
+      dispatch(actions.closeModal());
     } else {
       setFieldError('channelName', t('errors.networkError'));
       setSubmitting(false);
@@ -62,7 +62,7 @@ const ModalRenameChannel = () => {
   };
 
   const hideHandler = () => {
-    dispatch(closeModal());
+    dispatch(actions.closeModal());
   };
 
   const showHandler = (setFieldValue) => () => {
@@ -72,7 +72,7 @@ const ModalRenameChannel = () => {
 
   const cancelHandler = (resetForm) => () => {
     resetForm();
-    dispatch(closeModal());
+    dispatch(actions.closeModal());
   };
 
   return (

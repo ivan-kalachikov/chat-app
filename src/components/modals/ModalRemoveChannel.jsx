@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
-import { closeModal } from '../../slices/modal';
+import { actions } from '../../slices';
 import ackWithTimeout from '../../utils';
 
 const ModalRemoveChannel = () => {
@@ -21,7 +21,7 @@ const ModalRemoveChannel = () => {
   const onSuccessSend = ({ status }) => {
     if (status === 'ok') {
       setRequestStatus('success');
-      dispatch(closeModal());
+      dispatch(actions.closeModal());
     } else {
       setRequestStatus('failed');
       setRequestError(t('errors.networkError'));
@@ -44,7 +44,7 @@ const ModalRemoveChannel = () => {
 
   const hideHandler = () => {
     setRequestStatus('idle');
-    dispatch(closeModal());
+    dispatch(actions.closeModal());
   };
 
   return (

@@ -53,10 +53,5 @@ const channelsSlice = createSlice({
 });
 
 const { reducer, actions } = channelsSlice;
-const {
-  setCurrentChannel, addChannel, removeChannel, renameChannel,
-} = actions;
-export {
-  setCurrentChannel, addChannel, removeChannel, renameChannel, DEFAULT_CHANNEL_ID,
-};
+export { actions, DEFAULT_CHANNEL_ID };
 export default reducer;

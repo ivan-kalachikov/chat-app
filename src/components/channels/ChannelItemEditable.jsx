@@ -4,8 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { setCurrentChannel } from '../../slices/channels';
-import { openModal } from '../../slices/modal';
+import { actions } from '../../slices';
 
 const ChannelItemEditable = ({ commonProps }) => {
   const { t } = useTranslation();
@@ -14,15 +13,15 @@ const ChannelItemEditable = ({ commonProps }) => {
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    dispatch(setCurrentChannel({ id }));
+    dispatch(actions.setCurrentChannel({ id }));
   };
 
   const renameHandler = () => {
-    dispatch(openModal({ type: 'renameChannel', extra: { id } }));
+    dispatch(actions.openModal({ type: 'renameChannel', extra: { id } }));
   };
 
   const removeHandler = () => {
-    dispatch(openModal({ type: 'removeChannel', extra: { id } }));
+    dispatch(actions.openModal({ type: 'removeChannel', extra: { id } }));
   };
 
   return (

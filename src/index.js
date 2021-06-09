@@ -12,7 +12,7 @@ import '../assets/application.scss';
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
-console.log(window.process.env.ROLLBAR_ACCESS_TOKEN);
+console.log(process.env.ROLLBAR_ACCESS_TOKEN);
 const rollbar = new Rollbar({
   enabled: process.env.NODE_ENV === 'production',
   accessToken: process.env.ROLLBAR_ACCESS_TOKEN,

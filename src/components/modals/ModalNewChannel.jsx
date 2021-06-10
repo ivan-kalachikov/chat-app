@@ -14,11 +14,8 @@ import ackWithTimeout from '../../utils';
 const ModalAddChannel = () => {
   const { t } = useTranslation();
   const socket = useContext(SocketInstanceContext);
-  const TYPE = 'addChannel';
   const inputRef = useRef(null);
   const channels = useSelector((state) => state.channelsInfo.channels);
-  const isOpen = useSelector((state) => state.modal.isOpen);
-  const modalType = useSelector((state) => state.modal.type);
   const channelsNames = channels.map(({ name }) => name);
   const dispatch = useDispatch();
 
@@ -86,7 +83,7 @@ const ModalAddChannel = () => {
         errors, touched, submitForm, isSubmitting, resetForm,
       }) => (
         <Modal
-          show={isOpen && modalType === TYPE}
+          show
           onShow={showHandler}
           onHide={hideHandler}
           centered

@@ -14,11 +14,8 @@ import ackWithTimeout from '../../utils';
 const ModalRenameChannel = () => {
   const { t } = useTranslation();
   const socket = useContext(SocketInstanceContext);
-  const TYPE = 'renameChannel';
   const inputRef = useRef(null);
   const channels = useSelector((state) => state.channelsInfo.channels);
-  const isOpen = useSelector((state) => state.modal.isOpen);
-  const modalType = useSelector((state) => state.modal.type);
   const renamedChannelId = useSelector((state) => state.modal.extra?.id);
   const channelsNames = channels.map(({ name }) => name);
   const dispatch = useDispatch();
@@ -85,7 +82,7 @@ const ModalRenameChannel = () => {
         errors, touched, submitForm, isSubmitting, resetForm, setFieldValue,
       }) => (
         <Modal
-          show={isOpen && modalType === TYPE}
+          show
           onShow={showHandler(setFieldValue)}
           onHide={hideHandler}
           centered

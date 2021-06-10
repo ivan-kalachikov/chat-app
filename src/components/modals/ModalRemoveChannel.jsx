@@ -10,9 +10,6 @@ import ackWithTimeout from '../../utils';
 const ModalRemoveChannel = () => {
   const { t } = useTranslation();
   const socket = useContext(SocketInstanceContext);
-  const TYPE = 'removeChannel';
-  const isOpen = useSelector((state) => state.modal.isOpen);
-  const modalType = useSelector((state) => state.modal.type);
   const id = useSelector((state) => state.modal?.extra);
   const dispatch = useDispatch();
   const [requestStatus, setRequestStatus] = useState('idle');
@@ -49,7 +46,7 @@ const ModalRemoveChannel = () => {
 
   return (
     <Modal
-      show={isOpen && modalType === TYPE}
+      show
       onHide={hideHandler}
       centered
     >

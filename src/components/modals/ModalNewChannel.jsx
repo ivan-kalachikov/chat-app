@@ -91,23 +91,24 @@ const ModalAddChannel = () => {
           <Modal.Header closeButton>
             <Modal.Title>{t('ui.channels.addTitle')}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Field
-                name="channelName"
-                innerRef={inputRef}
-                disabled={isSubmitting}
-                autoComplete="off"
-                data-testid="add-channel"
-                className={`form-control ${errors.channelName && touched.channelName && 'is-invalid'}`}
-              />
-              <ErrorMessage className="invalid-tooltip" name="channelName" component="div" />
-            </Form>
-          </Modal.Body>
-          <Modal.Footer className="border-0">
-            <Button onClick={cancelHandler(resetForm)} variant="secondary">{t('ui.common.cancel')}</Button>
-            <Button onClick={submitForm} variant="primary" type="submit" disabled={isSubmitting}>{t('ui.common.send')}</Button>
-          </Modal.Footer>
+          <Form>
+            <fieldset disabled={isSubmitting}>
+              <Modal.Body>
+                <Field
+                  name="channelName"
+                  innerRef={inputRef}
+                  autoComplete="off"
+                  data-testid="add-channel"
+                  className={`form-control ${errors.channelName && touched.channelName && 'is-invalid'}`}
+                />
+                <ErrorMessage className="invalid-tooltip" name="channelName" component="div" />
+              </Modal.Body>
+              <Modal.Footer className="border-0">
+                <Button onClick={cancelHandler(resetForm)} variant="secondary">{t('ui.common.cancel')}</Button>
+                <Button onClick={submitForm} variant="primary" type="submit">{t('ui.common.send')}</Button>
+              </Modal.Footer>
+            </fieldset>
+          </Form>
         </Modal>
       )}
     </Formik>

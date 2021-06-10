@@ -17,10 +17,6 @@ const socketWatcher = (socket, dispatch) => {
     dispatch(actions.renameChannel({ channel: response }));
   });
 
-  socket.on('connect_error', () => {
-    dispatch(actions.openModal({ type: 'connectionProblem', extra: 'connect_error' }));
-  });
-
   socket.on('disconnect', (reason) => {
     dispatch(actions.openModal({ type: 'connectionProblem', extra: reason }));
   });

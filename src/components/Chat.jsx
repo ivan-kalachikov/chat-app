@@ -2,14 +2,12 @@ import React, { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
 import AuthTokenContext from '../context/AuthTokenContext.jsx';
-import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
 import { asyncActions } from '../slices';
 import Channels from './channels/Channels.jsx';
 import Messages from './messages/Messages.jsx';
 
 const Chat = () => {
   const { authToken } = useContext(AuthTokenContext);
-  const socket = useContext(SocketInstanceContext);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(asyncActions.setInitialState(authToken));

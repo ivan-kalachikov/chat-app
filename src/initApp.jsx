@@ -1,6 +1,10 @@
 import React from 'react';
-import App from './App.jsx';
+import App, { dispatch } from './App.jsx';
+import socketWatcher from './socketWatcher.js';
 
-const initApp = (socket) => Promise.resolve(<App socket={socket} />);
+const initApp = (socket) => {
+  socketWatcher(socket, dispatch);
+  return Promise.resolve(<App socket={socket} />);
+};
 
 export default initApp;

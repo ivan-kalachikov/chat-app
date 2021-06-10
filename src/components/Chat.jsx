@@ -4,7 +4,6 @@ import { Container, Row } from 'react-bootstrap';
 import AuthTokenContext from '../context/AuthTokenContext.jsx';
 import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
 import { asyncActions } from '../slices';
-import socketWatcher from '../socketWatcher';
 import Channels from './channels/Channels.jsx';
 import Messages from './messages/Messages.jsx';
 
@@ -14,7 +13,6 @@ const Chat = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(asyncActions.setInitialState(authToken));
-    socketWatcher(socket, dispatch);
   });
 
   return (

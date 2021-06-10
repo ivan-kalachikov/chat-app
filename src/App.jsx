@@ -15,7 +15,6 @@ import Modals from './components/modals/Modals.jsx';
 import AuthTokenContext from './context/AuthTokenContext.jsx';
 import AuthUsernameContext from './context/AuthUsernameContext.jsx';
 import SocketInstanceContext from './context/SocketInstanceContext.jsx';
-
 import rootReducer from './slices/index';
 
 const store = configureStore({
@@ -61,3 +60,4 @@ const App = ({ socket }) => {
 };
 
 export default App;
+export const { dispatch } = store;

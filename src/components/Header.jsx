@@ -4,11 +4,9 @@ import { Navbar, Container } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import AuthTokenContext from '../context/AuthTokenContext.jsx';
 import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
-import SocketInstanceContext from '../context/SocketInstanceContext.jsx';
 
 const Header = () => {
   const { t } = useTranslation();
-  const socket = useContext(SocketInstanceContext);
   const { authToken, setAuthToken } = useContext(AuthTokenContext);
   const { setAuthUsername } = useContext(AuthUsernameContext);
   const exitClickHandler = () => {
@@ -16,7 +14,6 @@ const Header = () => {
     localStorage.removeItem('username');
     setAuthUsername(null);
     setAuthToken(null);
-    socket.removeAllListeners();
   };
   return (
     <Navbar expand="lg" bg="white" className="shadow-sm">

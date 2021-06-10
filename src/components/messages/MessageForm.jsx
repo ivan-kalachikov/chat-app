@@ -80,22 +80,23 @@ const MessageForm = () => {
       }) => (
         <div className="border-top py-3 px-5">
           <Form>
-            <InputGroup>
-              <Field
-                name="message"
-                className={`border-0 form-control ${errors.message && touched.message && 'is-invalid'}`}
-                disabled={isSubmitting}
-                innerRef={inputRef}
-                autoComplete="off"
-                placeholder={t('ui.messages.placeholder')}
-                onBlur={blurHandler(setTouched)}
-                data-testid="new-message"
-              />
-              <ErrorMessage className="invalid-tooltip top-0 translate-middle-y" name="message" component="div" />
-              <Button onClick={submitForm} variant="" type="submit" title={t('ui.messages.send')} disabled={isSubmitting}>
-                <SendIcon />
-              </Button>
-            </InputGroup>
+            <fieldset disabled={isSubmitting}>
+              <InputGroup>
+                <Field
+                  name="message"
+                  className={`border-0 form-control ${errors.message && touched.message && 'is-invalid'}`}
+                  innerRef={inputRef}
+                  autoComplete="off"
+                  placeholder={t('ui.messages.placeholder')}
+                  onBlur={blurHandler(setTouched)}
+                  data-testid="new-message"
+                />
+                <ErrorMessage className="invalid-tooltip top-0 translate-middle-y" name="message" component="div" />
+                <Button onClick={submitForm} variant="" type="submit" title={t('ui.common.send')}>
+                  <SendIcon />
+                </Button>
+              </InputGroup>
+            </fieldset>
           </Form>
         </div>
       )}

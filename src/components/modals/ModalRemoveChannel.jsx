@@ -64,7 +64,7 @@ const ModalRemoveChannel = () => {
         )}
       </Modal.Body>
       <Modal.Footer className="border-0">
-        <Button onClick={hideHandler} variant="secondary">{t('ui.channels.cancel')}</Button>
+        <Button onClick={hideHandler} variant="secondary">{t('ui.common.cancel')}</Button>
         <Button onClick={clickHandler} variant="danger" type="submit" disabled={requestStatus === 'pending'}>{t('ui.channels.remove')}</Button>
       </Modal.Footer>
     </Modal>

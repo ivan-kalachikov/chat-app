@@ -7,11 +7,11 @@ import Channels from './channels/Channels.jsx';
 import Messages from './messages/Messages.jsx';
 
 const Chat = () => {
-  const { authToken } = useContext(AuthTokenContext);
+  const { authToken, setAuthToken } = useContext(AuthTokenContext);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(asyncActions.setInitialState(authToken));
-  });
+    dispatch(asyncActions.setInitialState({ authToken, setAuthToken }));
+  }, []);
 
   return (
     <Container className="my-4 overflow-hidden flex-grow-1 rounded shadow">

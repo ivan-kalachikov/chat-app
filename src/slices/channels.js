@@ -7,13 +7,18 @@ const DEFAULT_CHANNEL_ID = 1;
 
 export const setInitialState = createAsyncThunk(
   'channelsInfo/setInitialState',
-  async (token, thunkAPI) => {
+  async ({ authToken, setAuthToken }, thunkAPI) => {
     const url = routes.data();
     try {
-      const response = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await axios.get(url, { headers: { Authorization: `Bearer ${authToken}` } });
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      if (error.response.status === 401 && setAuthToken) {
+        setAuthToken(null);
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('username');
+      }
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );

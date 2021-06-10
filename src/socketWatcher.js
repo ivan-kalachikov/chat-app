@@ -18,11 +18,11 @@ const socketWatcher = (socket, dispatch) => {
   });
 
   socket.on('connect_error', () => {
-    console.log('CONNECT ERROR');
+    dispatch(actions.openModal({ type: 'connectionProblem', extra: 'connect_error' }));
   });
 
   socket.on('disconnect', (reason) => {
-    console.log('DISCONNECT', reason);
+    dispatch(actions.openModal({ type: 'connectionProblem', extra: reason }));
   });
 };
 

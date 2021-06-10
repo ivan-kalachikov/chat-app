@@ -9,7 +9,7 @@ import Header from './components/Header.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Chat from './components/Chat.jsx';
-import Modals from './components/modals/Modals.jsx';
+import Modals from './components/modals/index.jsx';
 import AuthTokenContext from './context/AuthTokenContext.jsx';
 import AuthUsernameContext from './context/AuthUsernameContext.jsx';
 import SocketInstanceContext from './context/SocketInstanceContext.jsx';

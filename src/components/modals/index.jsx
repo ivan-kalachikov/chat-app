@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import ModalAddChannel from './ModalNewChannel.jsx';
 import ModalRemoveChannel from './ModalRemoveChannel.jsx';
 import ModalRenameChannel from './ModalRenameChannel.jsx';
+import ConnectionProblem from './ModalConnectionProblem';
 
 const modalByType = {
   addChannel: <ModalAddChannel />,
   removeChannel: <ModalRemoveChannel />,
   renameChannel: <ModalRenameChannel />,
+  connectionProblem: <ConnectionProblem />,
 };
 
 const Modals = () => {

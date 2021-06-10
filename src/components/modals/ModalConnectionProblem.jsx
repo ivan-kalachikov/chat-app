@@ -22,7 +22,7 @@ const ModalConnectionProblem = () => {
     >
       <Toast
         autohide
-        delay={5000}
+        delay={10000}
         show
         onClose={hideHandler}
       >

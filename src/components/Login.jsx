@@ -42,7 +42,7 @@ const Login = () => {
     localStorage.setItem('username', username);
     setAuthToken(token);
     setAuthUsername(username);
-  });
+  }, [authData, setAuthToken, setAuthUsername]);
 
   const authenticate = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.login();

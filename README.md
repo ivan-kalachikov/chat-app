@@ -6,7 +6,7 @@
 
 ---
 ## Описание
-Real-time приложение на React/Redux.
+Real-time приложение - Чат (упрощенный аналог слэка) на React/Redux.
 
 (REST, JWT, websockets, React (с хуками), Redux (@reduxjs/toolkit), Formik, rollbar, heroku)
 

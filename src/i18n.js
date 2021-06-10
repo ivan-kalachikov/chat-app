@@ -17,9 +17,11 @@ const options = {
   fallbackLng: 'ru',
 };
 
-const i18n = i18next.createInstance();
-i18n
-  .use(initReactI18next)
-  .init(options, buildYupLocale);
+const initI18n = () => {
+  const i18n = i18next.createInstance();
+  i18n
+    .use(initReactI18next)
+    .init(options, buildYupLocale);
+};
 
-export default i18n;
+export default initI18n;

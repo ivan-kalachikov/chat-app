@@ -17,9 +17,9 @@ const options = {
   fallbackLng: 'ru',
 };
 
-const initI18n = () => {
+const initI18n = async () => {
   const i18n = i18next.createInstance();
-  i18n
+  await i18n
     .use(initReactI18next)
     .init(options, buildYupLocale);
 };

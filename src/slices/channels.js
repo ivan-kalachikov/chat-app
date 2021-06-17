@@ -2,8 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import routes from '../routes.js';
-
-const DEFAULT_CHANNEL_ID = 1;
+import DEFAULT_CHANNEL_ID from '../constants.js';
 
 export const setInitialState = createAsyncThunk(
   'channelsInfo/setInitialState',
@@ -58,5 +57,5 @@ const channelsSlice = createSlice({
 });
 
 const { reducer, actions } = channelsSlice;
-export { actions, DEFAULT_CHANNEL_ID };
+export { actions };
 export default reducer;

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { configureStore } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';
@@ -13,11 +11,6 @@ import Modals from './components/modals/index.jsx';
 import AuthTokenContext from './context/AuthTokenContext.jsx';
 import AuthUsernameContext from './context/AuthUsernameContext.jsx';
 import SocketInstanceContext from './context/SocketInstanceContext.jsx';
-import rootReducer from './slices/index';
-
-const store = configureStore({
-  reducer: rootReducer,
-});
 
 const App = ({ socket }) => {
   const token = localStorage.getItem('authToken');
@@ -26,36 +19,33 @@ const App = ({ socket }) => {
   const [authUsername, setAuthUsername] = useState(username);
 
   return (
-    <Provider store={store}>
-      <div className="d-flex flex-column h-100">
-        <AuthTokenContext.Provider value={{ authToken, setAuthToken }}>
-          <AuthUsernameContext.Provider value={{ authUsername, setAuthUsername }}>
-            <SocketInstanceContext.Provider value={socket}>
-              <Router>
-                <Header />
-                <Switch>
-                  <Route exact path="/">
-                    { authToken ? <Chat /> : <Redirect to="/login" /> }
-                  </Route>
-                  <Route exact path="/login">
-                    {authToken ? <Redirect to="/" /> : <Login />}
-                  </Route>
-                  <Route exact path="/signup">
-                    {authToken ? <Redirect to="/" /> : <Signup />}
-                  </Route>
-                  <Route path="*">
-                    <Page404 />
-                  </Route>
-                </Switch>
-                <Modals />
-              </Router>
-            </SocketInstanceContext.Provider>
-          </AuthUsernameContext.Provider>
-        </AuthTokenContext.Provider>
-      </div>
-    </Provider>
+    <div className="d-flex flex-column h-100">
+      <AuthTokenContext.Provider value={{ authToken, setAuthToken }}>
+        <AuthUsernameContext.Provider value={{ authUsername, setAuthUsername }}>
+          <SocketInstanceContext.Provider value={socket}>
+            <Router>
+              <Header />
+              <Switch>
+                <Route exact path="/">
+                  { authToken ? <Chat /> : <Redirect to="/login" /> }
+                </Route>
+                <Route exact path="/login">
+                  {authToken ? <Redirect to="/" /> : <Login />}
+                </Route>
+                <Route exact path="/signup">
+                  {authToken ? <Redirect to="/" /> : <Signup />}
+                </Route>
+                <Route path="*">
+                  <Page404 />
+                </Route>
+              </Switch>
+              <Modals />
+            </Router>
+          </SocketInstanceContext.Provider>
+        </AuthUsernameContext.Provider>
+      </AuthTokenContext.Provider>
+    </div>
   );
 };
 
 export default App;
-export const { dispatch } = store;

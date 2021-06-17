@@ -26,7 +26,7 @@ const Channels = () => {
           <span className="visually-hidden">+</span>
         </Button>
       </div>
-      <Nav as="ul" variant="pills" className="flex-column nav-pills nav-fill">
+      <Nav as="ul" variant="pills" className="flex-column nav-fill">
         {channelsList && channelsList.map(({ id, name, removable }) => {
           const props = {
             key: id, name, id, isActive: id === currentChannelId,

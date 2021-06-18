@@ -44,7 +44,6 @@ const Login = () => {
 
   const authenticate = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.login();
-    setSubmitting(true);
     try {
       const response = await axios.post(url, data);
       const responseData = response.data;

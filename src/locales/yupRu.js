@@ -29,7 +29,7 @@ const buildYupLocale = (lng, t) => {
 
   Yup.addMethod(Yup.string, 'equalPasswords', function cb(password, message) {
     function validationFunction(value) {
-      const isValid = value ? this.resolve(password) === value : true;
+      const isValid = this.resolve(password) === value;
       return isValid;
     }
     return this.test({

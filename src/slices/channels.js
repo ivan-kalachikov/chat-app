@@ -3,20 +3,17 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import routes from '../routes.js';
 import DEFAULT_CHANNEL_ID from '../constants.js';
+import { getAuth } from '../context/index.js';
 
 export const setInitialState = createAsyncThunk(
   'channelsInfo/setInitialState',
-  async ({ authToken, setAuthToken }, thunkAPI) => {
+  async (thunkAPI) => {
     const url = routes.data();
+    const { token } = getAuth();
     try {
-      const response = await axios.get(url, { headers: { Authorization: `Bearer ${authToken}` } });
+      const response = await axios.get(url, { headers: { Authorization: `Bearer ${token}` } });
       return response.data;
     } catch (error) {
-      if (error.response.status === 401 && setAuthToken) {
-        setAuthToken(null);
-        localStorage.removeItem('authToken');
-        localStorage.removeItem('username');
-      }
       return thunkAPI.rejectWithValue(error.message);
     }
   },

@@ -1,17 +1,19 @@
 import { useContext } from 'react';
-import AuthTokenContext from './AuthTokenContext.jsx';
-import AuthUsernameContext from './AuthUsernameContext.jsx';
+import AuthContext, { getAuth, setAuth } from './AuthContext.jsx';
+import UsernameContext from './UsernameContext.jsx';
 import SocketInstanceContext from './SocketInstanceContext.jsx';
 
-const useAuthToken = () => useContext(AuthTokenContext);
-const useAuthUsername = () => useContext(AuthUsernameContext);
+const useAuth = () => useContext(AuthContext);
+const useUsername = () => useContext(UsernameContext);
 const useSocketInstance = () => useContext(SocketInstanceContext);
 
 export {
-  AuthTokenContext,
-  useAuthToken,
-  AuthUsernameContext,
-  useAuthUsername,
+  AuthContext,
+  UsernameContext,
   SocketInstanceContext,
+  useAuth,
+  useUsername,
   useSocketInstance,
+  getAuth,
+  setAuth,
 };

@@ -10,11 +10,11 @@ import {
   Container, Row, Col, Card, Form, Button,
 } from 'react-bootstrap';
 import routes from '../routes';
-import { useAuthToken, useAuthUsername } from '../context';
+import { useAuth, useUsername } from '../context';
 
 const Login = () => {
-  const { setAuthToken } = useAuthToken();
-  const { setAuthUsername } = useAuthUsername();
+  const { setIsAuth, setAuth } = useAuth();
+  const { setUsername } = useUsername();
   const [authData, setAuthData] = useState(null);
   const { t } = useTranslation();
 
@@ -37,11 +37,10 @@ const Login = () => {
       return;
     }
     const { token, username } = authData;
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('username', username);
-    setAuthToken(token);
-    setAuthUsername(username);
-  }, [authData, setAuthToken, setAuthUsername]);
+    setAuth({ token, username });
+    setIsAuth(true);
+    setUsername(username);
+  }, [authData, setIsAuth, setUsername]);
 
   const authenticate = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.login();

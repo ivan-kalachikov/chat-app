@@ -6,14 +6,14 @@ import {
 } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import { useAuthUsername, useSocketInstance } from '../../context';
+import { useUsername, useSocketInstance } from '../../context';
 import ackWithTimeout from '../../utils';
 import SendIcon from '../../images/send.svg';
 
 const MessageForm = () => {
   const { t } = useTranslation();
   const socket = useSocketInstance();
-  const { authUsername } = useAuthUsername();
+  const { username } = useUsername();
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const inputRef = useRef(null);
 
@@ -48,7 +48,7 @@ const MessageForm = () => {
   const submitHandler = ({ message }, {
     resetForm, setSubmitting, setTouched, setFieldError,
   }) => {
-    const newMsg = { body: message, channelId: currentChannelId, username: authUsername };
+    const newMsg = { body: message, channelId: currentChannelId, username };
     socket.volatile.emit(
       'newMessage',
       newMsg,
@@ -66,7 +66,7 @@ const MessageForm = () => {
 
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
+  }, [currentChannelId]);
 
   return (
     <Formik
@@ -77,13 +77,13 @@ const MessageForm = () => {
       {({
         errors, touched, submitForm, isSubmitting, setTouched,
       }) => (
-        <div className="border-top py-3 px-5">
-          <Form>
+        <div className="py-3 px-5">
+          <Form className="py-1 border rounded-2">
             <fieldset disabled={isSubmitting}>
               <InputGroup>
                 <Field
                   name="message"
-                  className={`border-0 form-control ${errors.message && touched.message && 'is-invalid'}`}
+                  className={`border-0 p-0 ps-2 form-control ${errors.message && touched.message && 'is-invalid'}`}
                   innerRef={inputRef}
                   autoComplete="off"
                   placeholder={t('ui.messages.placeholder')}

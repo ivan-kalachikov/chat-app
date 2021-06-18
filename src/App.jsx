@@ -18,33 +18,39 @@ const App = ({ socket }) => {
   const [authToken, setAuthToken] = useState(token);
   const [authUsername, setAuthUsername] = useState(username);
 
+  const AppProviders = ({ children }) => (
+    <AuthTokenContext.Provider value={{ authToken, setAuthToken }}>
+      <AuthUsernameContext.Provider value={{ authUsername, setAuthUsername }}>
+        <SocketInstanceContext.Provider value={socket}>
+          {children}
+        </SocketInstanceContext.Provider>
+      </AuthUsernameContext.Provider>
+    </AuthTokenContext.Provider>
+  );
+
   return (
-    <div className="d-flex flex-column h-100">
-      <AuthTokenContext.Provider value={{ authToken, setAuthToken }}>
-        <AuthUsernameContext.Provider value={{ authUsername, setAuthUsername }}>
-          <SocketInstanceContext.Provider value={socket}>
-            <Router>
-              <Header />
-              <Switch>
-                <Route exact path="/">
-                  { authToken ? <Chat /> : <Redirect to="/login" /> }
-                </Route>
-                <Route exact path="/login">
-                  {authToken ? <Redirect to="/" /> : <Login />}
-                </Route>
-                <Route exact path="/signup">
-                  {authToken ? <Redirect to="/" /> : <Signup />}
-                </Route>
-                <Route path="*">
-                  <Page404 />
-                </Route>
-              </Switch>
-              <Modals />
-            </Router>
-          </SocketInstanceContext.Provider>
-        </AuthUsernameContext.Provider>
-      </AuthTokenContext.Provider>
-    </div>
+    <AppProviders>
+      <div className="d-flex flex-column h-100">
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              { authToken ? <Chat /> : <Redirect to="/login" /> }
+            </Route>
+            <Route exact path="/login">
+              {authToken ? <Redirect to="/" /> : <Login />}
+            </Route>
+            <Route exact path="/signup">
+              {authToken ? <Redirect to="/" /> : <Signup />}
+            </Route>
+            <Route path="*">
+              <Page404 />
+            </Route>
+          </Switch>
+          <Modals />
+        </Router>
+      </div>
+    </AppProviders>
   );
 };
 

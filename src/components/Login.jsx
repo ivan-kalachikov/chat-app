@@ -40,7 +40,7 @@ const Login = () => {
     setAuth({ token, username });
     setIsAuth(true);
     setUsername(username);
-  }, [authData, setIsAuth, setUsername]);
+  }, [authData, setAuth, setIsAuth, setUsername]);
 
   const authenticate = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.login();

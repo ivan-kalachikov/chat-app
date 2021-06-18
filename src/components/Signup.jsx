@@ -46,7 +46,7 @@ const Signup = () => {
     setAuth({ token, username });
     setIsAuth(true);
     setUsername(username);
-  }, [authData, setIsAuth, setUsername]);
+  }, [authData, setAuth, setIsAuth, setUsername]);
 
   const registration = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.signup();

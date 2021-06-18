@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ErrorMessage, Formik,
 } from 'formik';
@@ -10,12 +10,11 @@ import {
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import routes from '../routes';
-import AuthTokenContext from '../context/AuthTokenContext.jsx';
-import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
+import { useAuthToken, useAuthUsername } from '../context';
 
 const Signup = () => {
-  const { setAuthToken } = useContext(AuthTokenContext);
-  const { setAuthUsername } = useContext(AuthUsernameContext);
+  const { setAuthToken } = useAuthToken();
+  const { setAuthUsername } = useAuthUsername();
   const [authData, setAuthData] = useState(null);
   const { t } = useTranslation();
 
@@ -52,7 +51,6 @@ const Signup = () => {
 
   const registration = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.signup();
-    setSubmitting(true);
     try {
       const response = await axios.post(url, data);
       const responseData = response.data;

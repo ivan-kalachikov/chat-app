@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Container } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import AuthTokenContext from '../context/AuthTokenContext.jsx';
-import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
+import { useAuthToken, useAuthUsername } from '../context';
 
 const Header = () => {
   const { t } = useTranslation();
-  const { authToken, setAuthToken } = useContext(AuthTokenContext);
-  const { setAuthUsername } = useContext(AuthUsernameContext);
+  const { authToken, setAuthToken } = useAuthToken();
+  const { setAuthUsername } = useAuthUsername();
   const exitClickHandler = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('username');

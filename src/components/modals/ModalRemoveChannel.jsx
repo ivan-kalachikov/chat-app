@@ -1,15 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
+import { useSocketInstance } from '../../context';
 import { actions } from '../../slices';
 import ackWithTimeout from '../../utils';
 
 const ModalRemoveChannel = () => {
   const { t } = useTranslation();
-  const socket = useContext(SocketInstanceContext);
+  const socket = useSocketInstance();
   const id = useSelector((state) => state.modal?.extra);
   const dispatch = useDispatch();
   const [requestStatus, setRequestStatus] = useState('idle');

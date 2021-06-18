@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ErrorMessage, Formik,
 } from 'formik';
@@ -10,12 +10,11 @@ import {
   Container, Row, Col, Card, Form, Button,
 } from 'react-bootstrap';
 import routes from '../routes';
-import AuthTokenContext from '../context/AuthTokenContext.jsx';
-import AuthUsernameContext from '../context/AuthUsernameContext.jsx';
+import { useAuthToken, useAuthUsername } from '../context';
 
 const Login = () => {
-  const { setAuthToken } = useContext(AuthTokenContext);
-  const { setAuthUsername } = useContext(AuthUsernameContext);
+  const { setAuthToken } = useAuthToken();
+  const { setAuthUsername } = useAuthUsername();
   const [authData, setAuthData] = useState(null);
   const { t } = useTranslation();
 

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { InputGroup, Button } from 'react-bootstrap';
 import {
@@ -6,15 +6,14 @@ import {
 } from 'formik';
 import { useTranslation } from 'react-i18next';
 import * as Yup from 'yup';
-import AuthUsernameContext from '../../context/AuthUsernameContext.jsx';
-import SocketInstanceContext from '../../context/SocketInstanceContext.jsx';
+import { useAuthUsername, useSocketInstance } from '../../context';
 import ackWithTimeout from '../../utils';
 import SendIcon from '../../images/send.svg';
 
 const MessageForm = () => {
   const { t } = useTranslation();
-  const socket = useContext(SocketInstanceContext);
-  const { authUsername } = useContext(AuthUsernameContext);
+  const socket = useSocketInstance();
+  const { authUsername } = useAuthUsername();
   const currentChannelId = useSelector((state) => state.channelsInfo.currentChannelId);
   const inputRef = useRef(null);
 

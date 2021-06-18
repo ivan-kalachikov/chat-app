@@ -8,9 +8,7 @@ import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Chat from './components/Chat.jsx';
 import Modals from './components/modals/index.jsx';
-import AuthTokenContext from './context/AuthTokenContext.jsx';
-import AuthUsernameContext from './context/AuthUsernameContext.jsx';
-import SocketInstanceContext from './context/SocketInstanceContext.jsx';
+import { AuthTokenContext, AuthUsernameContext, SocketInstanceContext } from './context';
 
 const App = ({ socket }) => {
   const token = localStorage.getItem('authToken');

@@ -6,10 +6,10 @@ import { useAuth, useUsername } from '../context';
 
 const Header = () => {
   const { t } = useTranslation();
-  const { isAuth, setIsAuth, setAuth } = useAuth();
+  const { isAuth, setIsAuth, logOut } = useAuth();
   const { setUsername } = useUsername();
   const exitClickHandler = () => {
-    setAuth({ token: null, username: null });
+    logOut();
     setUsername(null);
     setIsAuth(null);
   };

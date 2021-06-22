@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import AuthContext, { getAuth, setAuth } from './AuthContext.jsx';
+import AuthContext, { getAuth, logIn, logOut } from './AuthContext.jsx';
 import UsernameContext from './UsernameContext.jsx';
 import SocketInstanceContext from './SocketInstanceContext.jsx';
 
@@ -15,5 +15,6 @@ export {
   useUsername,
   useSocketInstance,
   getAuth,
-  setAuth,
+  logIn,
+  logOut,
 };

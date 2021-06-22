@@ -9,7 +9,7 @@ import Signup from './components/Signup.jsx';
 import Chat from './components/Chat.jsx';
 import Modals from './components/modals/index.jsx';
 import {
-  AuthContext, UsernameContext, SocketInstanceContext, getAuth, setAuth,
+  AuthContext, UsernameContext, SocketInstanceContext, getAuth, logIn, logOut,
 } from './context';
 
 const App = ({ socket }) => {
@@ -18,7 +18,10 @@ const App = ({ socket }) => {
   const [isAuth, setIsAuth] = useState(!!Auth.token);
 
   const AppProviders = ({ children }) => (
-    <AuthContext.Provider value={{ isAuth, setIsAuth, setAuth }}>
+    <AuthContext.Provider value={{
+      isAuth, setIsAuth, logIn, logOut,
+    }}
+    >
       <UsernameContext.Provider value={{ username, setUsername }}>
         <SocketInstanceContext.Provider value={socket}>
           {children}

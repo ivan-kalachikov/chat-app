@@ -13,7 +13,7 @@ import routes from '../routes';
 import { useAuth, useUsername } from '../context';
 
 const Signup = () => {
-  const { setIsAuth, setAuth } = useAuth();
+  const { setIsAuth, logIn } = useAuth();
   const { setUsername } = useUsername();
   const [authData, setAuthData] = useState(null);
   const { t } = useTranslation();
@@ -42,11 +42,11 @@ const Signup = () => {
     if (!authData) {
       return;
     }
-    const { token, username } = authData;
-    setAuth({ token, username });
+    const { username } = authData;
+    logIn(authData);
     setIsAuth(true);
     setUsername(username);
-  }, [authData, setAuth, setIsAuth, setUsername]);
+  }, [authData, logIn, setIsAuth, setUsername]);
 
   const registration = async (data, { setFieldError, setSubmitting }) => {
     const url = routes.signup();

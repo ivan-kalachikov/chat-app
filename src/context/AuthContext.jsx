@@ -1,16 +1,13 @@
 import React from 'react';
 
-const setOrRemove = (key, value) => {
-  if (value) {
-    localStorage.setItem(key, value);
-  } else {
-    localStorage.removeItem(key);
-  }
+const logIn = ({ token, username }) => {
+  localStorage.setItem('token', token);
+  localStorage.setItem('username', username);
 };
 
-const setAuth = ({ token, username }) => {
-  setOrRemove('token', token);
-  setOrRemove('username', username);
+const logOut = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('username');
 };
 
 const getAuth = () => {
@@ -25,4 +22,4 @@ const AuthContext = React.createContext({
 });
 
 export default AuthContext;
-export { getAuth, setAuth };
+export { getAuth, logIn, logOut };

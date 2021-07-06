@@ -22,6 +22,7 @@ const initI18n = async () => {
   await i18n
     .use(initReactI18next)
     .init(options, buildYupLocale);
+  return i18n;
 };
 
 export default initI18n;
